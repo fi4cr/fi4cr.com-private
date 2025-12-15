@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Artist Homepage - LUNA V</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a413ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#1c1022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar hiding for cleaner mobile look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white pb-24">
+<!-- Top App Bar / Header -->
+<header class="sticky top-0 z-40 w-full bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-white/5 transition-colors duration-300">
+<div class="flex items-center justify-between px-4 h-14">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-slate-600 dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-center">
+<h1 class="text-lg font-bold tracking-wider uppercase text-slate-900 dark:text-white">LUNA V</h1>
+<p class="text-[10px] font-medium text-primary uppercase tracking-[0.15em] leading-none">Electronic / Lo-Fi</p>
+</div>
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-slate-600 dark:text-white">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</header>
+<!-- Hero / Featured Video -->
+<div class="p-4">
+<div class="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg group cursor-pointer">
+<!-- Background Image -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Abstract purple neon lights in a dark club setting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBQWbqaHvyl0z9aA8oNf7C7OsUV_EmvZC0kkN5HS4rnxI7xP0fvPTwQkUaEOpv3GgsjjStjVqZab-qsQklJChWfJkPjVxF3O7kdxXfp3AZgcwW497_B6aUEsBCfUxuubgIyEoSq2OV63La1bixsYM4xGQzAvrFKImbbinHnszFCYbJzhkyDXi-55HZIifb5WSIACUz6ZysdeKuKjPF0QwFN4SuSe4ZzWXkE2zh3-4WuO7eCHJ_7kE27T4KlmTztm_KfGhIIuiQ56cS9");'>
+</div>
+<!-- Overlay Gradient -->
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent"></div>
+<!-- Play Button & Content -->
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<button class="flex items-center justify-center w-16 h-16 rounded-full bg-primary/90 text-white backdrop-blur-sm shadow-[0_0_20px_rgba(164,19,236,0.5)] transform transition-transform group-hover:scale-110 active:scale-95">
+<span class="material-symbols-outlined" style="font-size: 32px;">play_arrow</span>
+</button>
+</div>
+<div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+<div>
+<p class="text-xs font-semibold text-primary/80 uppercase tracking-wider mb-0.5">Featured Video</p>
+<p class="text-white font-bold text-lg leading-tight shadow-black drop-shadow-md">Neon Dreams (Official)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Latest Drop Section -->
+<section class="mt-2">
+<h2 class="px-4 text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+            Latest Drop
+            <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+</h2>
+<div class="px-4 @container">
+<div class="flex flex-col @xl:flex-row bg-white dark:bg-white/5 border border-gray-200 dark:border-white/5 rounded-xl overflow-hidden shadow-sm dark:shadow-none">
+<!-- Album Art -->
+<div class="w-full @xl:w-48 aspect-square @xl:aspect-auto bg-cover bg-center" data-alt="Surreal 3D geometric shapes in purple and dark blue" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDPn7SoYZDaT0QxLGEJuT8AZdE2Jryx0sJ8ZBEV2jr0nDyqwTEQeVTtqwzP-OxxpT4KYb4Jvox2u2WfmPipg9FapZ_tGd3SZAKsx9cms8DsQttaHkFlQP90Jivu7SQz6d10ICli1SVv_QAMxvHTEmE8Q5U1rnSsVCo8tsUTxs1GSD_eu8fV3__DOuhcs1198NtyiUBdBncb-jgXtFBkUacpcx7om7pdldqyj1CmlKsl-Wgd8nN0j2GMa7ECKgnXKeZ7bX6kGFQZPJ6W");'>
+</div>
+<!-- Content -->
+<div class="flex flex-col justify-center p-4 gap-3 w-full">
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white leading-tight">Midnight Echoes</h3>
+<p class="text-sm text-slate-500 dark:text-gray-400 mt-1">EP • Released Nov 2023</p>
+</div>
+<div class="flex items-center gap-3 mt-1">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white text-sm font-semibold h-10 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+                            Listen Now
+                        </button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg border border-gray-200 dark:border-white/10 text-slate-600 dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Popular Tracks List -->
+<section class="mt-8">
+<div class="flex items-center justify-between px-4 mb-3">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Popular Tracks</h2>
+<a class="text-xs font-semibold text-primary hover:text-primary/80" href="#">See All</a>
+</div>
+<div class="flex flex-col px-2">
+<!-- Track 1 -->
+<div class="flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 transition-colors group cursor-pointer">
+<div class="w-8 text-center text-slate-400 font-medium text-sm group-hover:hidden">1</div>
+<div class="w-8 text-center hidden group-hover:flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</div>
+<div class="relative h-12 w-12 rounded bg-cover bg-center shrink-0 ml-1" data-alt="Abstract liquid oil painting effect in orange and purple" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAD5wNss6KZC5JxkBO5PtpVhKksPqxg2-UQcWcfJik1mWqG7widjDqnNt_LvbVmKj6jWD_-zq0uMyD4zOCF7Q--270tYW5vec4hFXZAMju1r7sQfKOdmbWmT6RLpKJMWZqVe3yNTMrUGYr442ygdoV5o-JBCjzVvqeot6Z3FVkXluft-H77-u0YlWvxeXba7yfI8zYNLDlKKu9-ky7pabD4t1z_blK1S_PLoMopKFlnyHj2ZUICJEjyEjd1cUcW8qUEIeYAZ9CJsqkt");'>
+</div>
+<div class="flex flex-col ml-3 grow">
+<p class="text-sm font-semibold text-slate-900 dark:text-white line-clamp-1">Lost in the Static</p>
+<p class="text-xs text-slate-500 dark:text-gray-400">1.2M Plays</p>
+</div>
+<div class="text-xs font-medium text-slate-500 dark:text-gray-400 mr-2">3:42</div>
+<button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+<!-- Track 2 -->
+<div class="flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 transition-colors group cursor-pointer">
+<div class="w-8 text-center text-primary font-medium text-sm group-hover:hidden">
+<span class="material-symbols-outlined text-[16px] animate-bounce">graphic_eq</span>
+</div>
+<div class="w-8 text-center hidden group-hover:flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">pause</span>
+</div>
+<div class="relative h-12 w-12 rounded bg-cover bg-center shrink-0 ml-1" data-alt="Dark moody neon cityscape at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBHSL2FLy-jGf0f0KLPdRwR6A5-gz1p9NeT-e_lKnV5hcJnTOxcAz_HpyoMvXLENoDqwWtHvUnTDHXHR0Y_FOVVbi9Y8YdqpEnNfdIJZWisq_lLsqlJzbqSn-xs6TUvU1kQbgFmtFkQPdKhiLhr3ny4cFOTAdTddLWsvfoFke0xuBdDUPfLCp7cTsM18we4LXGtIc22mmmRfdVvTHedvCvKnElWN3-1_tzMH_1_M71UFePppl9QVyZ0Lm75MwEizZjOWrVrbq7wwN1i");'>
+<!-- Playing Overlay -->
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center rounded"></div>
+</div>
+<div class="flex flex-col ml-3 grow">
+<p class="text-sm font-semibold text-primary line-clamp-1">Velvet Sky</p>
+<p class="text-xs text-slate-500 dark:text-gray-400">890K Plays</p>
+</div>
+<div class="text-xs font-medium text-slate-500 dark:text-gray-400 mr-2">4:15</div>
+<button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+<!-- Track 3 -->
+<div class="flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 transition-colors group cursor-pointer">
+<div class="w-8 text-center text-slate-400 font-medium text-sm group-hover:hidden">3</div>
+<div class="w-8 text-center hidden group-hover:flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</div>
+<div class="relative h-12 w-12 rounded bg-cover bg-center shrink-0 ml-1" data-alt="Surfer silhouette against a purple sunset" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzeWAllGSOiJiigxKyRW_DKlkwP0_Oe7Aku_pEp4kDztN9Vzlb0KJYJxud3REJ-21wx4M-3uf_KV2e0NwUxNg-3KlS8tleBmXbWAEb0_fPD369p12-s8Ty_SAmaEWvxZLEKeC8XWmpRhWJpQ51WpeHp0QW43sl9wv_fnkSlD-N4893XYamWPQOQxrw_S7-wbluZanVOUXZz_UqwGl8xqRI3N5IAn1m_zmr-iW0vDjt1lXGT-btQno0vyiYqLQrWXreFpnDGS_424gO");'>
+</div>
+<div class="flex flex-col ml-3 grow">
+<p class="text-sm font-semibold text-slate-900 dark:text-white line-clamp-1">Ocean Waves (Remix)</p>
+<p class="text-xs text-slate-500 dark:text-gray-400">540K Plays</p>
+</div>
+<div class="text-xs font-medium text-slate-500 dark:text-gray-400 mr-2">2:58</div>
+<button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+</section>
+<!-- Explore Grid -->
+<section class="mt-8 px-4">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Explore</h2>
+<div class="grid grid-cols-2 gap-3">
+<!-- Playlists -->
+<a class="group relative flex flex-col justify-end h-32 p-3 rounded-xl overflow-hidden bg-gray-800" href="#">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-40" data-alt="DJ console mixer details with colorful lights" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBD6hnWbRDLDO9qYoeDXXfb12lPQvI9wbwmL3Edg4Ovr0IydltkRZY65xK1QVeirw3SE8XSv_8Nj7aQPstK_OK-od_Oka6WCiObB3kFs30akZ7SKbt9v5UeFtL-xUnlRlIpIzHAiDh2eIyCKSDWtyslXEc_Zh0FnDnQTF1P-xMzjRaaObqAi8xx59I9xVMq3igaZF3CZWinNZDD2bHEBIu3Fi7YF8CX1dkF0bf50YGlEAGTT2FvCzmHXGc5f6t_EHN0MEyFW8dvA9A0");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<span class="material-symbols-outlined relative z-10 text-white mb-1">queue_music</span>
+<span class="relative z-10 text-white font-bold text-lg">Playlists</span>
+</a>
+<!-- Tour -->
+<a class="group relative flex flex-col justify-end h-32 p-3 rounded-xl overflow-hidden bg-gray-800" href="#">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-40" data-alt="Concert crowd silhouette with stage lights" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYIpHLO0aWhNWNnp347ngTO6dMVbzdiHz-I5aI3KcloywzPwZA1dG_EideFpntrQ3822v0zETrH03EE23fPN6SxZYKq14eJPP_C6dBqAs1vhygvfK4pR_KEoY9oxyQEO_-PW84kxc3psxgZTsVFPllXtGoPrvcfYgdw_E5LN8KpfIoVEqHUmsLSBZ9imOH7_K5vf11YnkfdwW1uyJOwKS8GW18tgNlhMl7VzsTibBk_gJCWL8mT6JI4qrcmi1zc09VFNrDrGyem873");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<span class="material-symbols-outlined relative z-10 text-white mb-1">public</span>
+<span class="relative z-10 text-white font-bold text-lg">Tour Dates</span>
+</a>
+<!-- Merch -->
+<a class="group relative flex flex-col justify-end h-32 p-3 rounded-xl overflow-hidden bg-gray-800" href="#">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-40" data-alt="Clothing hanging on a rack fashion" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBeB5BERDuprJdmK1u1u8S_zZ9gLXRfBm1rHB7CcZ6XRDEYL8JGLeUxqEO8Rb-5pmT2nyagvewqSOjsndwdNmHBHLidVWzqhXFmGk07vd7ghsLESOHLk9a3N8Hk341OJi60zWHhlFh56rJCD-o0eImucrRaSxNeisARx0vieoB3CU76YRO0fX36GxIuyUv5U931TPFZLHbHQpqBAQ2Jwb3IGLorLnPSxhPTQHNb-IWBryIA7d8dGWJehGkyv5zuCnzYMsS2TiLYzTZo");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<span class="material-symbols-outlined relative z-10 text-white mb-1">shopping_bag</span>
+<span class="relative z-10 text-white font-bold text-lg">Merch Store</span>
+</a>
+<!-- Bio -->
+<a class="group relative flex flex-col justify-end h-32 p-3 rounded-xl overflow-hidden bg-gray-800" href="#">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-40" data-alt="Artist silhouette in a studio setting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCaPauF9V50zCXlAoJ5Tc-oePJe7RwxRzANd-4mwWDEOnt9H9dFCFw0VcO6KoIbxlBLYGLeSa1MIXrpa4s-kp_wpKhpAtTWyeWA-dzg7Eqb50NMWgMw_s6ZVfso2eQZHlUPNHp4Lr30lBMlX8F5vQZGOmqRnLDbUscSDwTw2R4iOrkkmLnvi1itzqywZylFmlSorRu0c_qEd707YdmcO9anfvEAfQpX5bF6G2WZbDvzlPiHG1GR_Y-tsnGRgHduTcMtakpdkIpwBPou");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<span class="material-symbols-outlined relative z-10 text-white mb-1">person</span>
+<span class="relative z-10 text-white font-bold text-lg">Artist Bio</span>
+</a>
+</div>
+</section>
+<!-- Social Links -->
+<section class="mt-10 mb-8">
+<div class="flex justify-center gap-6">
+<a class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">photo_camera</span> <!-- Instagram placeholder -->
+</a>
+<a class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">alternate_email</span> <!-- Twitter/X placeholder -->
+</a>
+<a class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">music_note</span> <!-- Spotify placeholder -->
+</a>
+<a class="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">play_circle</span> <!-- YouTube placeholder -->
+</a>
+</div>
+<p class="text-center text-xs text-gray-500 mt-6">© 2024 LUNA V Music. All rights reserved.</p>
+</section>
+<!-- Bottom Tab Navigation -->
+<nav class="fixed bottom-0 left-0 w-full bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-200 dark:border-white/5 pb-safe pt-2 px-6 flex justify-between z-50 shadow-[0_-5px_20px_rgba(0,0,0,0.1)]">
+<a class="flex flex-col items-center gap-1 p-2 text-primary" href="#">
+<span class="material-symbols-outlined filled">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">library_music</span>
+<span class="text-[10px] font-medium">Music</span>
+</a>
+<!-- Center Floating Action Button (Optional style or just regular tab) -->
+<!-- Let's keep it standard iOS tabs as requested but maybe emphasize the middle one slightly if desired, sticking to standard for now -->
+<a class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="text-[10px] font-medium">Events</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</nav>
+<!-- Safe Area Padding helper for bottom nav -->
+<div class="h-6"></div>
+</body></html>
