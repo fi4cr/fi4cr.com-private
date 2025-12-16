@@ -12,12 +12,13 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css?v=1">
 </head>
 
 <body>
     <div class="background-glow"></div>
     <div class="scanlines"></div>
+
 
     <!-- Fixed Header -->
     <header class="fixed-header glass-panel">
@@ -39,7 +40,7 @@
         <!-- Hero Section -->
         <div class="hero-section">
             <div class="hero-artwork">
-                <img id="hero-image" src="cover_swing_dnb.png" alt="Swing D&B Cover Art"
+                <img id="hero-image" src="assets/images/covers/cover_swing_dnb.png" alt="Swing D&B Cover Art"
                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
                 <div class="artwork-glow"></div>
             </div>
@@ -51,11 +52,11 @@
                 </div>
             </div>
             <div class="hero-actions">
-                <button class="action-btn primary">
+                <button id="play-btn" class="action-btn primary">
                     <span class="material-symbols-outlined fill-current">play_arrow</span>
                     <span>Play</span>
                 </button>
-                <button class="action-btn secondary">
+                <button id="shuffle-btn" class="action-btn secondary">
                     <span class="material-symbols-outlined">shuffle</span>
                     <span>Shuffle</span>
                 </button>
@@ -85,7 +86,7 @@
             <div class="player-left">
                 <!-- Mini Video/Artwork -->
                 <div class="mini-video-wrapper">
-                    <img id="mini-player-img" src="cover_swing_dnb.png" alt="Cover"
+                    <img id="mini-player-img" src="assets/images/covers/cover_swing_dnb.png" alt="Cover"
                         style="width: 100%; height: 100%; object-fit: cover;">
                     <div style="display:none;"> <!-- Hidden iframe container -->
                         <iframe id="main-player" src="" title="YouTube video player" frameborder="0"
@@ -104,14 +105,17 @@
             </div>
 
             <div class="player-right">
-                <button class="control-btn">
+                <button id="mini-play-btn" class="control-btn">
+                    <span class="material-symbols-outlined">play_arrow</span>
+                </button>
+                <button id="next-btn" class="control-btn">
                     <span class="material-symbols-outlined">skip_next</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <script type="module" src="script.js"></script>
+    <script type="module" src="assets/js/script.js?v=1"></script>
 </body>
 
 </html>
