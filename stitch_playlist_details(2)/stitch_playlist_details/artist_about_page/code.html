@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Artist About Page</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#a413ec",
+              "background-light": "#f7f6f8",
+              "background-dark": "#1c1022",
+            },
+            fontFamily: {
+              "display": ["Spline Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom scrollbar hiding for horizontal scroll areas */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-white overflow-x-hidden selection:bg-primary selection:text-white">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root pb-24">
+<!-- Sticky Top Navigation -->
+<div class="sticky top-0 z-50 flex items-center justify-between p-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-transparent dark:border-white/5 transition-colors duration-300">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-2xl dark:text-white">arrow_back_ios_new</span>
+</button>
+<h2 class="text-lg font-bold tracking-tight uppercase opacity-0 transition-opacity duration-300 scroll-visible:opacity-100">Alexa Vance</h2>
+<button class="flex w-12 items-center justify-end text-primary font-semibold text-sm hover:opacity-80 transition-opacity">
+                Share
+            </button>
+</div>
+<!-- Hero Section -->
+<div class="@container w-full">
+<div class="px-0 @[480px]:px-4 pb-6">
+<div class="relative flex flex-col justify-end overflow-hidden bg-background-dark min-h-[420px] @[480px]:rounded-xl w-full">
+<!-- Background Image -->
+<div class="absolute inset-0 bg-cover bg-center bg-no-repeat" data-alt="Close up portrait of a female singer with moody purple lighting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDH2-swhJKM8B_ulmZtoaifnkpjd0KRs4Zib6b7DaBhG5A9EpZMRP0oOaFL-q6GekKKXgLbeAOXgUxK9_Ky2jnhT183lNi3wy1nRwyl03pPgpby8D60Jd_tBzFDBjXeNlXa2mhFBJK75ZNpeD1Yi7LzPAI2_YKQLTH4GebYuCeFgJMxSLDAVU5SMM3Rm8e24pvG6osieQpJp5tn71lQaA1gsnl9cpZbDV4y3g6zY16Tvb2zZDc7GvudCJIlMwYSONUOwNG4S-u5tPOC");'>
+</div>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/60 to-transparent"></div>
+<!-- Content -->
+<div class="relative z-10 px-5 pb-6">
+<span class="inline-block py-1 px-3 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-bold tracking-wider mb-3 backdrop-blur-sm">
+                            ELECTRONIC / SOUL
+                        </span>
+<h1 class="text-white text-4xl md:text-5xl font-bold leading-[0.95] tracking-tight mb-1">
+                            ALEXA VANCE
+                        </h1>
+<p class="text-gray-400 text-sm font-medium tracking-wide">LOS ANGELES, CA</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Biography Section -->
+<div class="px-5">
+<div class="flex flex-col gap-6">
+<!-- Headline -->
+<div class="flex items-center gap-3">
+<div class="h-px w-8 bg-primary"></div>
+<h2 class="text-white tracking-wide text-sm font-bold uppercase text-left">The Journey</h2>
+</div>
+<!-- Intro Text -->
+<p class="text-gray-300 text-base font-normal leading-relaxed">
+                    Born in the vibrant underground scenes of Berlin and raised on a diet of synth-pop and soul, my sound is a collision of worlds. What started as late-night experiments in a bedroom studio has evolved into a sonic identity that refuses to be boxed in.
+                </p>
+<!-- Pull Quote -->
+<div class="relative py-6 my-2">
+<span class="material-symbols-outlined absolute -top-2 left-0 text-5xl text-primary/20 rotate-180">format_quote</span>
+<p class="relative z-10 text-xl md:text-2xl font-semibold leading-tight text-white text-center px-4 italic">
+                        "Music isn't just sound, it's the architecture of emotion."
+                    </p>
+<span class="material-symbols-outlined absolute -bottom-2 right-0 text-5xl text-primary/20">format_quote</span>
+</div>
+<!-- Secondary Text -->
+<p class="text-gray-300 text-base font-normal leading-relaxed">
+                    From early experiments to headlining festival stages, the goal has always been the same: to make you feel something real. Every beat is a heartbeat, every lyric a confession. Welcome to the other side of silence.
+                </p>
+</div>
+</div>
+<!-- Influences Carousel Section -->
+<div class="mt-12 w-full overflow-hidden">
+<div class="px-5 mb-5 flex items-center justify-between">
+<h3 class="text-white text-lg font-bold tracking-tight">Sonic Roots</h3>
+<span class="text-xs text-primary font-medium cursor-pointer">View All</span>
+</div>
+<div class="flex overflow-x-auto no-scrollbar gap-5 px-5 pb-4 w-full snap-x snap-mandatory">
+<!-- Influence Item 1 -->
+<div class="flex flex-col items-center gap-3 snap-center shrink-0 w-24">
+<div class="size-24 rounded-full p-1 border-2 border-primary/30">
+<div class="size-full rounded-full bg-cover bg-center overflow-hidden" data-alt="Vintage synthesizer setup" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAiE2Mo4qNozaazCZHPjzDYKujuiJPMEEpF88gXWV4Q3pvnErsMLbVvvJ15V3zGKfj_u5fzbU5dQS6_sQeY9WiM44xhL-eQd0iOyuZBhzEi8tBDRZWtXk5S-WNI80IZgzKfnlCbEl44kACrUJdpwASifVWV6VN8hR1JLckkIrUBysTyFDDysUoNh97bX-WtZ60t8kzoYOOIYnGDSOXy_UOhZHcid81vW6gaV1DOnm-op_Hw_3HhWQUY2IlpW-CYahIxdbniRpw3GnU9");'>
+</div>
+</div>
+<span class="text-xs font-medium text-gray-300 text-center">Synthwave</span>
+</div>
+<!-- Influence Item 2 -->
+<div class="flex flex-col items-center gap-3 snap-center shrink-0 w-24">
+<div class="size-24 rounded-full p-1 border-2 border-white/10 grayscale hover:grayscale-0 hover:border-primary/50 transition-all">
+<div class="size-full rounded-full bg-cover bg-center overflow-hidden" data-alt="Microphone in a dark recording studio" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAirp9RazclZFtJk-ea26knfdDzlteFiQagXtIECOsCk59o2EqekMGsJmm21ZQiSI9GJSCp2f8PIgtesAvqfy7NV7bG6lb7UkLSZTm_rzkZz9a0kNLpBoLC8pdhDXHeNHRkUmAqESaDlqWQO8z2hAgbz8sAUhx6GhUTFiTcY4HQ0e-3nu-WjVyzhPf27h-jSHEKLIPN0MimfGFKkpLn-xu2kKfybeyy6-mTUNt5FWJ8uyRYDJEOLZyBeaO90P0eNyXrw50uF5CeR3Qj");'>
+</div>
+</div>
+<span class="text-xs font-medium text-gray-300 text-center">Neo-Soul</span>
+</div>
+<!-- Influence Item 3 -->
+<div class="flex flex-col items-center gap-3 snap-center shrink-0 w-24">
+<div class="size-24 rounded-full p-1 border-2 border-white/10 grayscale hover:grayscale-0 hover:border-primary/50 transition-all">
+<div class="size-full rounded-full bg-cover bg-center overflow-hidden" data-alt="Neon lights reflecting on wet city street at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDe4uIVRCjpe3c1DvpmUs2TwsKorKJBq7XQetQK8JvfMMhGlkvZkPGG1KA9-zMJNx3ytBiTJcqlhpk8FQsG6sKTkq2ViJgsWzTrv27pphgreYoiJ-peGGZAhoq84Vqn95DEk5dG5bCYzgK-M3uQWTbARv8gkMZr8nXJ464HqAReGM9KzLL6n3O-B2-n8XpkEEQr1hnany5IOlGeA6Vf0v8V-9OED9XCz9M6-I_nFdZiRBL4_2dMqlbgs54T6zmJQQp7y-nEFK5cowOQ");'>
+</div>
+</div>
+<span class="text-xs font-medium text-gray-300 text-center">Berlin 90s</span>
+</div>
+<!-- Influence Item 4 -->
+<div class="flex flex-col items-center gap-3 snap-center shrink-0 w-24">
+<div class="size-24 rounded-full p-1 border-2 border-white/10 grayscale hover:grayscale-0 hover:border-primary/50 transition-all">
+<div class="size-full rounded-full bg-cover bg-center overflow-hidden" data-alt="DJ controller mixing deck" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBslBlJJKg7NLvvkvDiffVgZJlkXJo582zhJ2pNlt89kdHbt5aH_FgYZnXnkqRQ5QeIMXfTo37xDrlq5zk-x9YTE1wCNSSvDVT9Gxt2QPfeEHaIspJt0Jz_0VZg69WK3rdQ0Vls2Z5eMJsmtHX1QTm4zMVCXrZsksO6qIywTimDgxktNhNfbkx2giaKsFDH9PemTMp6L6Pe4-OWYeLyYVlWeVVSvNvQclQSHazsDp5qrklx3Es70MnPj-RNX1Z_tr4OUwfvFgYumGIp");'>
+</div>
+</div>
+<span class="text-xs font-medium text-gray-300 text-center">House</span>
+</div>
+</div>
+</div>
+<!-- Social Connect -->
+<div class="mt-8 px-5 pb-8 flex justify-center gap-8">
+<button class="flex flex-col items-center gap-2 group">
+<div class="size-12 rounded-full bg-white/5 flex items-center justify-center text-white group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">music_note</span>
+</div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-gray-500 group-hover:text-white transition-colors">Spotify</span>
+</button>
+<button class="flex flex-col items-center gap-2 group">
+<div class="size-12 rounded-full bg-white/5 flex items-center justify-center text-white group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">photo_camera</span>
+</div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-gray-500 group-hover:text-white transition-colors">Insta</span>
+</button>
+<button class="flex flex-col items-center gap-2 group">
+<div class="size-12 rounded-full bg-white/5 flex items-center justify-center text-white group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">smart_display</span>
+</div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-gray-500 group-hover:text-white transition-colors">YouTube</span>
+</button>
+<button class="flex flex-col items-center gap-2 group">
+<div class="size-12 rounded-full bg-white/5 flex items-center justify-center text-white group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-gray-500 group-hover:text-white transition-colors">Contact</span>
+</button>
+</div>
+<!-- Spacer for Bottom Bar -->
+<div class="h-24"></div>
+<!-- Sticky Bottom CTA -->
+<div class="fixed bottom-0 left-0 right-0 z-40 p-4 bg-gradient-to-t from-background-dark via-background-dark/95 to-transparent">
+<div class="max-w-md mx-auto">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-between px-6 transition-transform active:scale-[0.98]">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-white">play_arrow</span>
+</div>
+<div class="flex flex-col items-start">
+<span class="text-sm font-bold">Latest Release</span>
+<span class="text-xs font-normal opacity-80">Midnight Echoes</span>
+</div>
+</div>
+<span class="text-sm font-bold tracking-wide">LISTEN</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

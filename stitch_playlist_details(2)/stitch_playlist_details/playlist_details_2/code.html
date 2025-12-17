@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Playlist Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#deb841","primary-dark": "#b08d26",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#050505","surface-dark": "#121212",
+                        "surface-lighter": "#1e1e1e",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-panel {
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-mini-player {
+            background: #121212;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }@keyframes progress {
+            0% { width: 0%; }
+            100% { width: 35%; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen font-display text-slate-900 dark:text-white selection:bg-primary selection:text-black antialiased overflow-x-hidden">
+<div class="relative flex flex-col w-full max-w-md mx-auto min-h-screen pb-24 shadow-2xl bg-background-light dark:bg-background-dark">
+<header class="fixed top-0 z-40 w-full max-w-md glass-panel border-b border-white/5 transition-all duration-300">
+<div class="flex items-center justify-between px-4 h-14">
+<button class="flex items-center justify-center w-10 h-10 -ml-2 rounded-full hover:bg-white/10 active:bg-white/20 transition-colors text-white">
+<span class="material-symbols-outlined text-[24px]">arrow_back_ios_new</span>
+</button>
+<button class="flex items-center gap-1 bg-surface-lighter py-1.5 px-4 rounded-full border border-white/10 hover:bg-white/5 active:bg-white/10 transition-colors">
+<span class="text-xs font-medium text-white/90">Chaos Rave Collection</span>
+<span class="material-symbols-outlined text-sm text-white/60">expand_more</span>
+</button>
+<div class="w-10"></div> 
+</div>
+</header>
+<main class="relative z-10 flex flex-col pt-24 px-5">
+<div class="flex flex-col items-center gap-6 mb-8">
+<div class="relative group w-48 h-48 sm:w-56 sm:h-56">
+<div class="w-full h-full rounded-2xl overflow-hidden shadow-2xl shadow-primary/10 bg-surface-dark transition-transform duration-500 hover:scale-[1.02] ring-1 ring-white/10">
+<img alt="Abstract digital art with geometric shapes and neon colors" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhdYeG1EqRogJepjylbl1SoXDzaVCv_NtoZU-1oXcCTTGRPTyvznWvyHuV7R7xifKbk1cfOmEfYa0dtLvDjoUFYD15xoFH4GPwbpGstY4UBmJw-0ksL3aTskeIcIZR72IV-y4vl0Q8ZFBqzMMVoKjmvXotlfKUKK4GODSkmoSmxjHsPuy69qp3GdE2YzvDQwD8jQ3Bgsq8k_LvNTbNE-Y8DWR5YUdUL-IPdXffzl4k7C3OlaomqP9SqlliqdZQ5bwCjC_reixjhlmZ"/>
+</div>
+</div>
+<div class="text-center space-y-1">
+<h2 class="text-2xl font-bold tracking-tight text-white leading-tight">Chaos Rave Collection</h2>
+<p class="text-sm text-white/60 font-medium">Curated by fi4cr</p>
+<p class="text-xs text-white/40 uppercase tracking-wider mt-1 font-semibold">10 Songs</p>
+</div>
+<div class="flex items-center gap-4 w-full mt-2">
+<button class="flex-1 bg-gradient-to-r from-primary to-primary-dark hover:brightness-110 text-black h-12 rounded-full flex items-center justify-center gap-2 font-bold shadow-[0_4px_20px_-4px_rgba(222,184,65,0.4)] transition-transform active:scale-95">
+<span class="material-symbols-outlined fill-current">play_arrow</span>
+<span>Play</span>
+</button>
+<button class="flex-1 bg-surface-lighter hover:bg-surface-lighter/80 text-white h-12 rounded-full flex items-center justify-center gap-2 font-bold transition-transform active:scale-95 border border-white/10">
+<span class="material-symbols-outlined">shuffle</span>
+<span>Shuffle</span>
+</button>
+</div>
+<div class="flex items-center justify-center gap-8 w-full">
+<button class="flex flex-col items-center gap-1 group text-white/50 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[24px]">ios_share</span>
+<span class="text-[10px] uppercase tracking-wide font-medium">Share</span>
+</button>
+<button class="flex flex-col items-center gap-1 group text-white/50 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">favorite</span>
+<span class="text-[10px] uppercase tracking-wide font-medium">Favorite</span>
+</button>
+<button class="flex flex-col items-center gap-1 group text-white/50 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[24px]">download</span>
+<span class="text-[10px] uppercase tracking-wide font-medium">Download</span>
+</button>
+</div>
+</div>
+<div class="sticky top-14 z-20 bg-background-dark/95 backdrop-blur-md py-4 mb-2 flex justify-between items-end border-b border-white/5">
+<h3 class="text-xs font-bold text-white/50 uppercase tracking-widest">Tracks</h3>
+<button class="text-xs text-primary font-bold hover:text-primary/80 flex items-center gap-1">
+                    Sort by
+                    <span class="material-symbols-outlined text-sm">sort</span>
+</button>
+</div>
+<div class="flex flex-col pb-6 space-y-1">
+<div class="group flex items-center gap-4 py-3.5 px-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-sm font-medium text-white/30 group-hover:text-white/60 tabular-nums font-mono">01</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-sm font-semibold text-white truncate group-hover:text-primary transition-colors">Breach</h4>
+<p class="text-xs text-white/40 truncate mt-0.5">Chaos Rave</p>
+</div>
+<div class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-xs text-white/40">3:42</span>
+<button class="text-white/40 hover:text-white">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3.5 px-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-sm font-medium text-white/30 group-hover:text-white/60 tabular-nums font-mono">02</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-sm font-semibold text-white truncate group-hover:text-primary transition-colors">Hazard Protocol</h4>
+<p class="text-xs text-white/40 truncate mt-0.5">Chaos Rave</p>
+</div>
+<div class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-xs text-white/40">4:10</span>
+<button class="text-white/40 hover:text-white">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3 px-2 rounded-lg bg-surface-lighter/60 border border-primary/10 transition-colors cursor-pointer relative overflow-hidden">
+<div class="w-6 text-sm font-bold text-primary tabular-nums font-mono">03</div>
+<div class="flex-1 min-w-0 relative z-10">
+<h4 class="text-sm font-bold text-primary truncate">High Voltage</h4>
+<p class="text-xs text-primary/60 truncate mt-0.5">Chaos Rave</p>
+</div>
+<div class="flex items-center gap-3 relative z-10">
+<div class="flex gap-0.5 items-end h-3 mr-1">
+<div class="w-0.5 h-full bg-primary animate-[pulse_0.8s_ease-in-out_infinite]"></div>
+<div class="w-0.5 h-2/3 bg-primary animate-[pulse_1.2s_ease-in-out_infinite]"></div>
+<div class="w-0.5 h-1/2 bg-primary animate-[pulse_1.0s_ease-in-out_infinite]"></div>
+</div>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3.5 px-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-sm font-medium text-white/30 group-hover:text-white/60 tabular-nums font-mono">04</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-sm font-semibold text-white truncate group-hover:text-primary transition-colors">Noise Rebel</h4>
+<p class="text-xs text-white/40 truncate mt-0.5">Chaos Rave</p>
+</div>
+<div class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-xs text-white/40">2:58</span>
+<button class="text-white/40 hover:text-white">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3.5 px-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-sm font-medium text-white/30 group-hover:text-white/60 tabular-nums font-mono">05</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-sm font-semibold text-white truncate group-hover:text-primary transition-colors">Overload</h4>
+<p class="text-xs text-white/40 truncate mt-0.5">Chaos Rave</p>
+</div>
+<div class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-xs text-white/40">3:33</span>
+<button class="text-white/40 hover:text-white">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3.5 px-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-sm font-medium text-white/30 group-hover:text-white/60 tabular-nums font-mono">06</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-sm font-semibold text-white truncate group-hover:text-primary transition-colors">System Failure</h4>
+<p class="text-xs text-white/40 truncate mt-0.5">Chaos Rave</p>
+</div>
+<div class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-xs text-white/40">4:15</span>
+<button class="text-white/40 hover:text-white">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3.5 px-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-sm font-medium text-white/30 group-hover:text-white/60 tabular-nums font-mono">07</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-sm font-semibold text-white truncate group-hover:text-primary transition-colors">Bass Drop</h4>
+<p class="text-xs text-white/40 truncate mt-0.5">Chaos Rave</p>
+</div>
+<div class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-xs text-white/40">3:05</span>
+<button class="text-white/40 hover:text-white">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-0 left-0 right-0 z-50 w-full max-w-md mx-auto">
+<div class="w-full h-[2px] bg-white/10 relative">
+<div class="absolute left-0 top-0 h-full w-[35%] bg-primary shadow-[0_0_8px_rgba(222,184,65,0.8)]"></div>
+</div>
+<div class="glass-mini-player px-4 h-16 flex items-center gap-3 shadow-2xl">
+<div class="h-10 w-10 rounded bg-surface-dark shrink-0 overflow-hidden relative shadow-lg ring-1 ring-white/10">
+<img alt="Thumbnail of current track" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX9Cnj5T5inLGOiFROplUWrV0jS9mGegqc-4Eg4hYbi6cauN3yT6yprF1qGw8yl03JRHrJYa1GcBRLTkBXfkFUn5j2amdpapOgCW3RSTJylIvCMbcX1-r1BK2yrPCm4xfm50j5h4W5n4xfus8IfrYP885YHrbBgKQEpGbwg-ELTz5rO3ZnaMP7E13AaJM580DdNQDFPEKU8nslURKSynyFYfMqlY23VnRNyOQtI2YNOZj6aZx0VUfg3yFW7f7VpUCWDAeqJnXYapNf"/>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-center gap-0.5 cursor-pointer">
+<h4 class="text-sm font-bold text-white truncate">High Voltage</h4>
+<p class="text-xs text-white/50 truncate">fi4cr</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center text-white hover:text-primary transition-colors active:scale-90">
+<span class="material-symbols-outlined text-[28px] fill-current">play_arrow</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-white/60 hover:text-white transition-colors active:scale-90">
+<span class="material-symbols-outlined text-[28px]">skip_next</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

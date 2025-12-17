@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Hub - fi4cr</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css?v=2">
+    <style>
+        /* Scoped override if needed, but styles.css should cover it */
+    </style>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+    <div class="scanlines"></div>
+
+    <!-- Sticky Header -->
+    <header class="hub-header p-4 flex justify-between items-center">
+        <div class="flex flex-col">
+            <h1 class="text-white text-lg font-bold">Playlist Hub</h1>
+            <span class="text-primary text-xs font-bold uppercase tracking-wider">fi4cr Music</span>
+        </div>
+        <div class="flex gap-4">
+            <button class="icon-btn">
+                <span class="material-symbols-outlined">search</span>
+            </button>
+            <button class="icon-btn">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content" style="padding-top: 0; padding-bottom: 5rem;">
+
+        <!-- Hero: Featured Release -->
+        <section class="p-4 pt-4">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-white font-bold text-lg">Featured Release</h2>
+            </div>
+            <div class="relative w-full aspect-4-5 rounded-xl overflow-hidden shadow-2xl cursor-pointer group">
+                <!-- Image -->
+                <div class="absolute inset-0 bg-cover"
+                    style="background-image: url('assets/images/covers/cover_swing_dnb.png');"></div>
+                <div class="absolute inset-0 gradient-overlay-bottom"></div>
+
+                <!-- Content -->
+                <div class="absolute inset-0 flex flex-col justify-end p-4">
+                    <div class="flex justify-between items-end">
+                        <div class="flex flex-col gap-1">
+                            <span class="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded w-fit">NEW</span>
+                            <h3 class="text-white text-2xl font-bold">Swing D&B</h3>
+                            <p class="text-gray text-xs">Electronic • 24 Tracks</p>
+                        </div>
+                        <button
+                            class="flex items-center justify-center w-12 h-12 bg-primary rounded-full shadow-lg text-white">
+                            <span class="material-symbols-outlined fill-current">play_arrow</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horizontal Scroll: Trending -->
+        <section class="mt-2">
+            <div class="flex justify-between items-center px-4 mb-3">
+                <h3 class="text-white font-bold text-lg">Trending Now</h3>
+                <button class="text-primary text-sm font-bold">See all</button>
+            </div>
+            <div class="snap-scroll-x px-4">
+                <!-- Card 1 -->
+                <div class="snap-item flex flex-col gap-2">
+                    <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-dark">
+                        <div class="absolute inset-0 bg-cover"
+                            style="background-image: url('assets/images/covers/cover_hiphop_study.png');"></div>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-bold truncate">Hip Hop Style</p>
+                        <p class="text-primary text-xs">1.2M plays</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="snap-item flex flex-col gap-2">
+                    <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-dark">
+                        <div class="absolute inset-0 bg-cover"
+                            style="background-image: url('assets/images/covers/cover_dark_techno.png');"></div>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-bold truncate">Dark Techno</p>
+                        <p class="text-primary text-xs">850K plays</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="snap-item flex flex-col gap-2">
+                    <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-dark">
+                        <div class="absolute inset-0 bg-cover"
+                            style="background-image: url('assets/images/covers/cover_orch_dubstep.png');"></div>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-bold truncate">Orchestral Dub</p>
+                        <p class="text-primary text-xs">Newly added</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid: Core Collections -->
+        <section class="mt-2 px-4">
+            <div class="flex items-center gap-2 mb-4 mt-2">
+                <span class="material-symbols-outlined text-primary">library_music</span>
+                <h3 class="text-white font-bold text-lg">Core Collections</h3>
+            </div>
+            <div class="grid-cols-2">
+                <!-- Item 1 -->
+                <div class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-cover"
+                        style="background-image: url('assets/images/covers/cover_ragga_dnb.png');"></div>
+                    <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                    <div class="absolute bottom-0 left-0 p-3">
+                        <p class="text-white text-sm font-bold">Ragga D&B</p>
+                        <p class="text-gray text-xs">Classic</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-cover"
+                        style="background-image: url('assets/images/covers/cover_folk_house.png');"></div>
+                    <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                    <div class="absolute bottom-0 left-0 p-3">
+                        <p class="text-white text-sm font-bold">Folk House</p>
+                        <p class="text-gray text-xs">Chill</p>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-cover"
+                        style="background-image: url('assets/images/covers/cover_chaos_rave.png');"></div>
+                    <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                    <div class="absolute bottom-0 left-0 p-3">
+                        <p class="text-white text-sm font-bold">Chaos Rave</p>
+                        <p class="text-gray text-xs">High Energy</p>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-cover"
+                        style="background-image: url('assets/images/covers/cover_celtic_trance.png');"></div>
+                    <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                    <div class="absolute bottom-0 left-0 p-3">
+                        <p class="text-white text-sm font-bold">Celtic Trance</p>
+                        <p class="text-gray text-xs">Atmospheric</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacer -->
+        <div class="h-8"></div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="hub.html" class="nav-item active">
+            <div class="nav-icon-container">
+                <span class="material-symbols-outlined">music_note</span>
+            </div>
+            <span>Hub</span>
+        </a>
+        <a href="about.html" class="nav-item">
+            <div class="nav-icon-container">
+                <span class="material-symbols-outlined">person</span>
+            </div>
+            <span>Artist</span>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon-container">
+                <span class="material-symbols-outlined">shopping_bag</span>
+            </div>
+            <span>Merch</span>
+        </a>
+        <a href="index.html" class="nav-item">
+            <div class="nav-icon-container">
+                <span class="material-symbols-outlined">play_circle</span>
+            </div>
+            <span>Player</span>
+        </a>
+    </nav>
+</body>
+
+</html>

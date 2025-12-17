@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Playlist Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a413ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#1c1022",
+                        "surface-dark": "#2a1d30",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-panel {
+            background: rgba(28, 16, 34, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-mini-player {
+            background: rgba(42, 29, 48, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen font-display text-slate-900 dark:text-white selection:bg-primary selection:text-white antialiased overflow-x-hidden">
+<div class="relative flex flex-col w-full max-w-md mx-auto min-h-screen pb-32 shadow-2xl bg-background-light dark:bg-background-dark">
+<header class="fixed top-0 z-40 w-full max-w-md glass-panel border-b border-white/5 transition-all duration-300">
+<div class="flex items-center justify-between px-4 h-14">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/10 active:bg-white/20 transition-colors text-white">
+<span class="material-symbols-outlined text-[24px]">arrow_back_ios_new</span>
+</button>
+<h1 class="text-sm font-semibold tracking-wide uppercase opacity-0 transition-opacity duration-300 pointer-events-none" id="scroll-title">Neon Nights</h1>
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/10 active:bg-white/20 transition-colors text-white">
+<span class="material-symbols-outlined text-[24px]">ios_share</span>
+</button>
+</div>
+</header>
+<div class="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-primary/30 via-background-dark/60 to-background-dark pointer-events-none z-0"></div>
+<main class="relative z-10 flex flex-col pt-20 px-4">
+<div class="flex flex-col items-center gap-6 mb-8">
+<div class="relative group">
+<div class="w-64 h-64 rounded-xl overflow-hidden shadow-2xl shadow-primary/20 bg-surface-dark transition-transform duration-500 hover:scale-[1.02]">
+<img alt="Abstract dark purple fluid gradient resembling neon smoke" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhdYeG1EqRogJepjylbl1SoXDzaVCv_NtoZU-1oXcCTTGRPTyvznWvyHuV7R7xifKbk1cfOmEfYa0dtLvDjoUFYD15xoFH4GPwbpGstY4UBmJw-0ksL3aTskeIcIZR72IV-y4vl0Q8ZFBqzMMVoKjmvXotlfKUKK4GODSkmoSmxjHsPuy69qp3GdE2YzvDQwD8jQ3Bgsq8k_LvNTbNE-Y8DWR5YUdUL-IPdXffzl4k7C3OlaomqP9SqlliqdZQ5bwCjC_reixjhlmZ"/>
+</div>
+<div class="absolute -inset-6 bg-primary/40 blur-3xl -z-10 rounded-full opacity-50 pointer-events-none"></div>
+</div>
+<div class="text-center space-y-2">
+<h2 class="text-3xl font-bold tracking-tight text-white leading-tight">Neon Nights Vol. 2</h2>
+<div class="flex items-center justify-center gap-2 text-white/60 text-sm font-medium">
+<div class="flex -space-x-2 mr-1">
+<div class="w-5 h-5 rounded-full bg-surface-dark border border-background-dark overflow-hidden"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX9Cnj5T5inLGOiFROplUWrV0jS9mGegqc-4Eg4hYbi6cauN3yT6yprF1qGw8yl03JRHrJYa1GcBRLTkBXfkFUn5j2amdpapOgCW3RSTJylIvCMbcX1-r1BK2yrPCm4xfm50j5h4W5n4xfus8IfrYP885YHrbBgKQEpGbwg-ELTz5rO3ZnaMP7E13AaJM580DdNQDFPEKU8nslURKSynyFYfMqlY23VnRNyOQtI2YNOZj6aZx0VUfg3yFW7f7VpUCWDAeqJnXYapNf"/></div>
+</div>
+<span>The Midnight</span>
+<span class="w-1 h-1 rounded-full bg-white/40"></span>
+<span>12 Songs, 42 min</span>
+</div>
+<p class="text-xs text-white/40 uppercase tracking-widest font-semibold mt-1">Updated Yesterday</p>
+</div>
+<div class="flex flex-col w-full gap-5 mt-2">
+<div class="flex items-center justify-center gap-4 w-full px-2">
+<button class="flex-1 bg-surface-dark hover:bg-surface-dark/80 text-white h-12 rounded-full flex items-center justify-center gap-2 font-bold transition-transform active:scale-95 border border-white/10">
+<span class="material-symbols-outlined">shuffle</span>
+<span>Shuffle</span>
+</button>
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white h-12 rounded-full flex items-center justify-center gap-2 font-bold shadow-[0_8px_20px_-6px_rgba(164,19,236,0.6)] transition-transform active:scale-95">
+<span class="material-symbols-outlined fill-current">play_arrow</span>
+<span>Play</span>
+</button>
+</div>
+<div class="flex items-center justify-between px-8 text-white/70">
+<button class="flex flex-col items-center gap-1 group w-16">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-2xl">download</span>
+</button>
+<button class="flex flex-col items-center gap-1 group w-16">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors fill-current text-primary text-2xl">favorite</span>
+</button>
+<button class="flex flex-col items-center gap-1 group w-16">
+<span class="material-symbols-outlined group-hover:text-white transition-colors text-2xl">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+<div class="sticky top-14 z-20 bg-background-dark/95 backdrop-blur-md py-3 -mx-4 px-6 border-b border-white/5 mb-2 flex justify-between items-center">
+<h3 class="text-sm font-semibold text-white/90 uppercase tracking-wider">Tracks</h3>
+<button class="text-xs text-primary font-medium hover:text-primary/80">Sort by</button>
+</div>
+<div class="flex flex-col pb-4 space-y-1">
+<div class="group flex items-center gap-4 py-3 px-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-center text-sm font-medium text-white/40 group-hover:text-white/80 tabular-nums">1</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-base font-medium text-white truncate group-hover:text-primary transition-colors">Midnight Drive</h4>
+<p class="text-sm text-white/50 truncate flex items-center gap-1">
+<span class="bg-white/10 text-[10px] px-1 rounded text-white/70">E</span>
+                        The Midnight
+                    </p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-white/40 font-medium tabular-nums">3:45</span>
+<button class="text-white/40 hover:text-white p-1 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3 px-3 rounded-xl bg-primary/10 border border-primary/20 transition-colors cursor-pointer relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent pointer-events-none"></div>
+<div class="w-6 flex items-center justify-center relative z-10">
+<span class="material-symbols-outlined text-primary text-[20px] animate-pulse">graphic_eq</span>
+</div>
+<div class="flex-1 min-w-0 relative z-10">
+<h4 class="text-base font-bold text-primary truncate">Synthesizer Love</h4>
+<p class="text-sm text-white/60 truncate">The Midnight</p>
+</div>
+<div class="flex items-center gap-3 relative z-10">
+<span class="text-xs text-primary/80 font-medium tabular-nums">4:02</span>
+<button class="text-primary hover:text-white p-1 rounded-full hover:bg-primary/20">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3 px-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-center text-sm font-medium text-white/40 group-hover:text-white/80 tabular-nums">3</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-base font-medium text-white truncate group-hover:text-primary transition-colors">Echoes in Rain</h4>
+<p class="text-sm text-white/50 truncate">Enya (Remix)</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-white/40 font-medium tabular-nums">2:55</span>
+<button class="text-white/40 hover:text-white p-1 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3 px-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-center text-sm font-medium text-white/40 group-hover:text-white/80 tabular-nums">4</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-base font-medium text-white truncate group-hover:text-primary transition-colors">Cyber City</h4>
+<p class="text-sm text-white/50 truncate">Gunship</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-white/40 font-medium tabular-nums">3:20</span>
+<button class="text-white/40 hover:text-white p-1 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3 px-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-center text-sm font-medium text-white/40 group-hover:text-white/80 tabular-nums">5</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-base font-medium text-white truncate group-hover:text-primary transition-colors">Neon Horizon</h4>
+<p class="text-sm text-white/50 truncate">Timecop1983</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-white/40 font-medium tabular-nums">4:15</span>
+<button class="text-white/40 hover:text-white p-1 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3 px-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-center text-sm font-medium text-white/40 group-hover:text-white/80 tabular-nums">6</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-base font-medium text-white truncate group-hover:text-primary transition-colors">Digital Dreams</h4>
+<p class="text-sm text-white/50 truncate">FM-84</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-white/40 font-medium tabular-nums">3:58</span>
+<button class="text-white/40 hover:text-white p-1 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3 px-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-center text-sm font-medium text-white/40 group-hover:text-white/80 tabular-nums">7</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-base font-medium text-white truncate group-hover:text-primary transition-colors">Retro Sunset</h4>
+<p class="text-sm text-white/50 truncate">Kalax</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-white/40 font-medium tabular-nums">2:45</span>
+<button class="text-white/40 hover:text-white p-1 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 py-3 px-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer active:bg-white/10">
+<span class="w-6 text-center text-sm font-medium text-white/40 group-hover:text-white/80 tabular-nums">8</span>
+<div class="flex-1 min-w-0">
+<h4 class="text-base font-medium text-white truncate group-hover:text-primary transition-colors">Vapor Trails</h4>
+<p class="text-sm text-white/50 truncate">The Midnight</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-white/40 font-medium tabular-nums">4:32</span>
+<button class="text-white/40 hover:text-white p-1 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-0 left-0 right-0 z-50 w-full max-w-md mx-auto">
+<div class="w-full h-[2px] bg-white/10 relative">
+<div class="absolute left-0 top-0 h-full w-[35%] bg-primary shadow-[0_0_10px_rgba(164,19,236,0.8)]"></div>
+</div>
+<div class="glass-mini-player px-4 py-3 flex items-center gap-4 border-t border-white/5 pb-8 shadow-2xl"> 
+<div class="h-12 w-12 rounded-lg bg-surface-dark shrink-0 overflow-hidden relative shadow-lg">
+<img alt="Spinning record thumbnail with purple hues" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX9Cnj5T5inLGOiFROplUWrV0jS9mGegqc-4Eg4hYbi6cauN3yT6yprF1qGw8yl03JRHrJYa1GcBRLTkBXfkFUn5j2amdpapOgCW3RSTJylIvCMbcX1-r1BK2yrPCm4xfm50j5h4W5n4xfus8IfrYP885YHrbBgKQEpGbwg-ELTz5rO3ZnaMP7E13AaJM580DdNQDFPEKU8nslURKSynyFYfMqlY23VnRNyOQtI2YNOZj6aZx0VUfg3yFW7f7VpUCWDAeqJnXYapNf"/>
+<div class="absolute bottom-1 right-1 flex gap-0.5 items-end h-3">
+<div class="w-0.5 h-full bg-primary animate-[pulse_0.8s_ease-in-out_infinite]"></div>
+<div class="w-0.5 h-2/3 bg-primary animate-[pulse_1.2s_ease-in-out_infinite]"></div>
+<div class="w-0.5 h-1/2 bg-primary animate-[pulse_1.0s_ease-in-out_infinite]"></div>
+</div>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-center gap-0.5 cursor-pointer">
+<div class="flex items-center gap-2">
+<h4 class="text-sm font-bold text-white truncate">Synthesizer Love</h4>
+</div>
+<p class="text-xs text-white/60 truncate">The Midnight • <span class="text-primary/80">Neon Nights</span></p>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 flex items-center justify-center text-white/80 hover:text-white transition-colors active:scale-90">
+<span class="material-symbols-outlined text-[26px]">devices</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-white hover:text-primary transition-colors active:scale-90">
+<span class="material-symbols-outlined fill-current text-[36px]">play_circle</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>
