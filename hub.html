@@ -24,9 +24,14 @@
 
     <!-- Sticky Header -->
     <header class="hub-header p-4 flex justify-between items-center">
-        <div class="flex flex-col">
-            <h1 class="text-white text-lg font-bold">Playlist Hub</h1>
-            <span class="text-primary text-xs font-bold uppercase tracking-wider">fi4cr Music</span>
+        <div class="flex items-center gap-3">
+            <button onclick="window.location.href='index.html'" class="icon-btn">
+                <span class="material-symbols-outlined">arrow_back_ios_new</span>
+            </button>
+            <div class="flex flex-col">
+                <h1 class="text-white text-lg font-bold">Playlist Hub</h1>
+                <span class="text-primary text-xs font-bold uppercase tracking-wider">fi4cr Music</span>
+            </div>
         </div>
         <div class="flex gap-4">
             <button class="icon-btn">
@@ -45,7 +50,8 @@
             <div class="flex justify-between items-center mb-3">
                 <h2 class="text-white font-bold text-lg">Featured Release</h2>
             </div>
-            <div class="relative w-full aspect-4-5 rounded-xl overflow-hidden shadow-2xl cursor-pointer group">
+            <div onclick="window.location.href='index.html?playlist=Swing%20D%26B'"
+                class="relative w-full aspect-4-5 rounded-xl overflow-hidden shadow-2xl cursor-pointer group">
                 <!-- Image -->
                 <div class="absolute inset-0 bg-cover"
                     style="background-image: url('assets/images/covers/cover_swing_dnb.png');"></div>
@@ -76,7 +82,8 @@
             </div>
             <div class="snap-scroll-x px-4">
                 <!-- Card 1 -->
-                <div class="snap-item flex flex-col gap-2">
+                <div onclick="window.location.href='index.html?playlist=Hip%20Hop%20Style'"
+                    class="snap-item flex flex-col gap-2">
                     <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-dark">
                         <div class="absolute inset-0 bg-cover"
                             style="background-image: url('assets/images/covers/cover_hiphop_study.png');"></div>
@@ -87,7 +94,8 @@
                     </div>
                 </div>
                 <!-- Card 2 -->
-                <div class="snap-item flex flex-col gap-2">
+                <div onclick="window.location.href='index.html?playlist=Dark%20Techno'"
+                    class="snap-item flex flex-col gap-2">
                     <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-dark">
                         <div class="absolute inset-0 bg-cover"
                             style="background-image: url('assets/images/covers/cover_dark_techno.png');"></div>
@@ -98,7 +106,8 @@
                     </div>
                 </div>
                 <!-- Card 3 -->
-                <div class="snap-item flex flex-col gap-2">
+                <div onclick="window.location.href='index.html?playlist=Orchestral%20Dubstep'"
+                    class="snap-item flex flex-col gap-2">
                     <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-dark">
                         <div class="absolute inset-0 bg-cover"
                             style="background-image: url('assets/images/covers/cover_orch_dubstep.png');"></div>
@@ -119,7 +128,8 @@
             </div>
             <div class="grid-cols-2">
                 <!-- Item 1 -->
-                <div class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                <div onclick="window.location.href='index.html?playlist=Ragga%20D%26B'"
+                    class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
                     <div class="absolute inset-0 bg-cover"
                         style="background-image: url('assets/images/covers/cover_ragga_dnb.png');"></div>
                     <div class="absolute inset-0 gradient-overlay-bottom"></div>
@@ -129,7 +139,8 @@
                     </div>
                 </div>
                 <!-- Item 2 -->
-                <div class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                <div onclick="window.location.href='index.html?playlist=Folk%20House'"
+                    class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
                     <div class="absolute inset-0 bg-cover"
                         style="background-image: url('assets/images/covers/cover_folk_house.png');"></div>
                     <div class="absolute inset-0 gradient-overlay-bottom"></div>
@@ -139,7 +150,8 @@
                     </div>
                 </div>
                 <!-- Item 3 -->
-                <div class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                <div onclick="window.location.href='index.html?playlist=Chaos%20Rave'"
+                    class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
                     <div class="absolute inset-0 bg-cover"
                         style="background-image: url('assets/images/covers/cover_chaos_rave.png');"></div>
                     <div class="absolute inset-0 gradient-overlay-bottom"></div>
@@ -149,7 +161,8 @@
                     </div>
                 </div>
                 <!-- Item 4 -->
-                <div class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                <div onclick="window.location.href='index.html?playlist=Celtic%20Trance'"
+                    class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
                     <div class="absolute inset-0 bg-cover"
                         style="background-image: url('assets/images/covers/cover_celtic_trance.png');"></div>
                     <div class="absolute inset-0 gradient-overlay-bottom"></div>

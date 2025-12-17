@@ -219,9 +219,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 playlistSelect.appendChild(option);
             });
 
-            let defaultIndex = allPlaylists.findIndex(p => p.playlist_name.includes("Swing D&B Collection"));
+            const urlParams = new URLSearchParams(window.location.search);
+            const playlistParam = urlParams.get('playlist');
+            let defaultIndex = -1;
+
+            if (playlistParam) {
+                log(`Looking for playlist param: "${playlistParam}"`);
+                defaultIndex = allPlaylists.findIndex(p => {
+                    const match = p.playlist_name.toLowerCase().includes(playlistParam.toLowerCase());
+                    if (match) log(`Found match: ${p.playlist_name}`);
+                    return match;
+                });
+                if (defaultIndex === -1) log(`No match found for: "${playlistParam}"`);
+            } else {
+                log("No playlist param found in URL");
+            }
+
+            if (defaultIndex === -1) {
+                log("Falling back to default Swing D&B");
+                defaultIndex = allPlaylists.findIndex(p => p.playlist_name.includes("Swing D&B Collection"));
+            }
+
             if (defaultIndex === -1) defaultIndex = 0;
 
+            log(`Final playlist index: ${defaultIndex}`);
             playlistSelect.value = defaultIndex;
             renderPlaylist(allPlaylists[defaultIndex]);
         })
