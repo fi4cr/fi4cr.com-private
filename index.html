@@ -49,10 +49,10 @@
             <div class="flex justify-between items-center mb-3">
                 <h2 class="text-white font-bold text-lg">Featured Release</h2>
             </div>
-            <div onclick="window.location.href='player.html?playlist=Swing%20D%26B'"
+            <div id="featured-card" onclick="window.location.href='player.html?playlist=Swing%20D%26B'"
                 class="relative w-full aspect-4-5 rounded-xl overflow-hidden shadow-2xl cursor-pointer group">
                 <!-- Image -->
-                <div class="absolute inset-0 bg-cover"
+                <div id="featured-img-bg" class="absolute inset-0 bg-cover"
                     style="background-image: url('assets/images/covers/cover_swing_dnb.png');"></div>
                 <div class="absolute inset-0 gradient-overlay-bottom"></div>
 
@@ -61,8 +61,8 @@
                     <div class="flex justify-between items-end">
                         <div class="flex flex-col gap-1">
                             <span class="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded w-fit">NEW</span>
-                            <h3 class="text-white text-2xl font-bold">Swing D&B</h3>
-                            <p class="text-gray text-xs">Electronic • 24 Tracks</p>
+                            <h3 id="featured-title" class="text-white text-2xl font-bold">Swing D&B</h3>
+                            <p id="featured-tracks" class="text-gray text-xs">Electronic • 24 Tracks</p>
                         </div>
                         <button
                             class="flex items-center justify-center w-12 h-12 bg-primary rounded-full shadow-lg text-white">
@@ -336,6 +336,61 @@
                         <p class="text-gray text-xs">Classical Glitch</p>
                     </div>
                 </div>
+                <!-- Item 20: World Electronica -->
+                <div onclick="window.location.href='player.html?playlist=World%20Electronica'"
+                    class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-cover"
+                        style="background-image: url('assets/images/covers/cover_world_electronica_style.png');"></div>
+                    <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                    <div class="absolute bottom-0 left-0 p-3">
+                        <p class="text-white text-sm font-bold">World Electronica</p>
+                        <p class="text-gray text-xs">Global Vibes</p>
+                    </div>
+                </div>
+                <!-- Item 21: UK Garage -->
+                <div onclick="window.location.href='player.html?playlist=UK%20Garage'"
+                    class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-cover"
+                        style="background-image: url('assets/images/covers/cover_uk_garage_style.png');"></div>
+                    <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                    <div class="absolute bottom-0 left-0 p-3">
+                        <p class="text-white text-sm font-bold">UK Garage</p>
+                        <p class="text-gray text-xs">London Underground</p>
+                    </div>
+                </div>
+                <!-- Item 22: Trap -->
+                <div onclick="window.location.href='player.html?playlist=Trap'"
+                    class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-cover"
+                        style="background-image: url('assets/images/covers/cover_trap_style.png');"></div>
+                    <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                    <div class="absolute bottom-0 left-0 p-3">
+                        <p class="text-white text-sm font-bold">Trap</p>
+                        <p class="text-gray text-xs">Heavy Bass</p>
+                    </div>
+                </div>
+                <!-- Item 23: Synthwave -->
+                <div onclick="window.location.href='player.html?playlist=Synthwave'"
+                    class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-cover"
+                        style="background-image: url('assets/images/covers/cover_synthwave_style.png');"></div>
+                    <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                    <div class="absolute bottom-0 left-0 p-3">
+                        <p class="text-white text-sm font-bold">Synthwave</p>
+                        <p class="text-gray text-xs">80s Retro</p>
+                    </div>
+                </div>
+                <!-- Item 24: Intelligent Dance Music -->
+                <div onclick="window.location.href='player.html?playlist=Intelligent%20Dance%20Music'"
+                    class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-cover"
+                        style="background-image: url('assets/images/covers/cover_idm_style.png');"></div>
+                    <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                    <div class="absolute bottom-0 left-0 p-3">
+                        <p class="text-white text-sm font-bold">IDM</p>
+                        <p class="text-gray text-xs">Experimental</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -370,6 +425,7 @@
             <span>Player</span>
         </a>
     </nav>
+    <script type="module" src="assets/js/hub.js"></script>
 </body>
 
 </html>

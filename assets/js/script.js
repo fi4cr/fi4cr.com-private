@@ -53,6 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
         "World Electronica": "assets/images/covers/cover_world_electronica_style.png",
         "UK Garage": "assets/images/covers/cover_uk_garage_style.png",
         "Trap": "assets/images/covers/cover_trap_style.png",
+        "Phonk": "assets/images/covers/cover_phonk_style.png",
+        "Dub": "assets/images/covers/cover_dub_style.png",
+        "Celtic House": "assets/images/covers/cover_celtic_house.png",
+        "Disco": "assets/images/covers/cover_disco_style.png",
+        "Liquid Funk": "assets/images/covers/cover_liquid_funk.png",
         "default": "assets/images/covers/cover_swing_dnb.png"
     };
 
@@ -246,8 +251,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (defaultIndex === -1) {
-                log("Falling back to default Swing D&B");
-                defaultIndex = allPlaylists.findIndex(p => p.playlist_name.includes("Swing D&B Collection"));
+                log("Finding latest published playlist...");
+                const now = new Date();
+                let latestPly = null;
+                let maxDate = new Date(0);
+
+                allPlaylists.forEach((p, idx) => {
+                    if (p.playlist_published_at) {
+                        const pDate = new Date(p.playlist_published_at);
+                        // Filter out future playlists
+                        if (pDate <= now && pDate > maxDate) {
+                            maxDate = pDate;
+                            latestPly = p;
+                            defaultIndex = idx;
+                        }
+                    }
+                });
+
+                if (defaultIndex !== -1) {
+                    log(`Selected latest playlist: ${allPlaylists[defaultIndex].playlist_name} (${maxDate.toISOString()})`);
+                } else {
+                    log("No valid published playlists found, defaulting to index 0");
+                    defaultIndex = 0;
+                }
             }
 
             if (defaultIndex === -1) defaultIndex = 0;
