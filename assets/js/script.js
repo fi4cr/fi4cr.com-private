@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const playlistContainer = document.getElementById('playlist-container');
     const pageTitle = document.getElementById('page-title');
     const headerTitle = document.getElementById('header-title');
-    const playlistSelect = document.getElementById('playlist-select');
     const trackCount = document.getElementById('track-count');
+
     const heroImage = document.getElementById('hero-image');
     const miniPlayerImg = document.getElementById('mini-player-img');
 
@@ -35,6 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
         "Dark Techno": "assets/images/covers/cover_dark_techno.png",
         "Chaos Rave": "assets/images/covers/cover_chaos_rave.png",
         "Celtic Trance": "assets/images/covers/cover_celtic_trance.png",
+        "Neoclassical Electronic": "assets/images/covers/cover_neoclassical_electronic.png",
+        "House Style": "assets/images/covers/cover_house_style.png",
+        "Rawphoric": "assets/images/covers/cover_rawphoric.png",
+        "Bubblegum Dance": "assets/images/covers/cover_bubblegum_dance.png",
+        "Chiptune": "assets/images/covers/cover_chiptune_style.png",
+        "Hardstyle": "assets/images/covers/cover_hardstyle_hardcore.png",
+        "Grime": "assets/images/covers/cover_grime_style.png",
+        "Footwork": "assets/images/covers/cover_footwork_juke.png",
+        "Eurodance": "assets/images/covers/cover_eurodance_style.png",
+        "Electro": "assets/images/covers/cover_electro_style.png",
+        "Downtempo": "assets/images/covers/cover_downtempo_style.png",
+        "Breakbeat": "assets/images/covers/cover_breakbeat_style.png",
+        "Ambient": "assets/images/covers/cover_ambient_style.png",
+        "IDM Ambient": "assets/images/covers/cover_idm_ambient_dub.png",
+        "Hyperbaroque": "assets/images/covers/cover_hyperbaroque_collection.png",
+        "World Electronica": "assets/images/covers/cover_world_electronica_style.png",
+        "UK Garage": "assets/images/covers/cover_uk_garage_style.png",
+        "Trap": "assets/images/covers/cover_trap_style.png",
         "default": "assets/images/covers/cover_swing_dnb.png"
     };
 
@@ -195,10 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event Listeners
-    playlistSelect.addEventListener('change', (e) => {
-        const selectedIndex = e.target.value;
-        renderPlaylist(allPlaylists[selectedIndex]);
-    });
+
 
     if (heroPlayBtn) heroPlayBtn.addEventListener('click', togglePlay);
     if (heroShuffleBtn) heroShuffleBtn.addEventListener('click', playRandom);
@@ -212,12 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
             log(`Data loaded. Playlists: ${data.length}`);
             allPlaylists = data;
 
-            allPlaylists.forEach((playlist, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = playlist.playlist_name.replace('fi4cr - ', '');
-                playlistSelect.appendChild(option);
-            });
+
 
             const urlParams = new URLSearchParams(window.location.search);
             const playlistParam = urlParams.get('playlist');
@@ -243,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (defaultIndex === -1) defaultIndex = 0;
 
             log(`Final playlist index: ${defaultIndex}`);
-            playlistSelect.value = defaultIndex;
+
             renderPlaylist(allPlaylists[defaultIndex]);
         })
         .catch(error => {
