@@ -29,6 +29,20 @@ document.addEventListener('DOMContentLoaded', () => {
         "Trap": "assets/images/covers/cover_trap_style.png",
         "Synthwave": "assets/images/covers/cover_synthwave_style.png",
         "Intelligent Dance Music": "assets/images/covers/cover_idm_style.png",
+        "Industrial Style Study": "assets/images/covers/cover_industrial_style.png",
+        "Hyperpop Style Study": "assets/images/covers/cover_hyperpop_style.png",
+        "Trance Style Study": "assets/images/covers/cover_trance_style.png",
+        "Liquid Funk": "assets/images/covers/cover_liquid_funk.png",
+        "Tribal House": "assets/images/covers/cover_tribal_house.png",
+        "Neo-Tokyo D&B": "assets/images/covers/cover_neotokyo_dnb.png",
+        "Swing Tech House": "assets/images/covers/cover_swing_tech_house.png",
+        "Dubstep Style Study": "assets/images/covers/cover_dubstep_style.png",
+        "South African House": "assets/images/covers/cover_south_african_house.png",
+        "Techno Style Study": "assets/images/covers/cover_techno_style.png",
+        "Tech House": "assets/images/covers/cover_tech_house.png",
+        "Melbourne Bounce": "assets/images/covers/cover_melbourne_bounce.png",
+        "Rave House": "assets/images/covers/cover_rave_house.png",
+        "Progressive House": "assets/images/covers/cover_progressive_house.png",
         "default": "assets/images/covers/cover_swing_dnb.png"
     };
 
