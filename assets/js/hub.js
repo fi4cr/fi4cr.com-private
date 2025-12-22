@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Melbourne Bounce": "assets/images/covers/cover_melbourne_bounce.png",
         "Rave House": "assets/images/covers/cover_rave_house.png",
         "Progressive House": "assets/images/covers/cover_progressive_house.png",
+        "Bluestep Collection": "assets/images/covers/cover_bluestep_collection.png",
         "default": "assets/images/covers/cover_swing_dnb.png"
     };
 

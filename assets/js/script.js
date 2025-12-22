@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Industrial Style Study": "assets/images/covers/cover_industrial_style.png",
         "Hyperpop Style Study": "assets/images/covers/cover_hyperpop_style.png",
         "Trance Style Study": "assets/images/covers/cover_trance_style.png",
+        "Bluestep Collection": "assets/images/covers/cover_bluestep_collection.png",
         "default": "assets/images/covers/cover_swing_dnb.png"
     };
 
