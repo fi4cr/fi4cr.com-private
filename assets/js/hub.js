@@ -27,11 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "World Electronica": "assets/images/covers/cover_world_electronica_style.png",
         "UK Garage": "assets/images/covers/cover_uk_garage_style.png",
         "Trap": "assets/images/covers/cover_trap_style.png",
-        "Synthwave": "assets/images/covers/cover_synthwave_style.png",
-        "Intelligent Dance Music": "assets/images/covers/cover_idm_style.png",
-        "Industrial Style Study": "assets/images/covers/cover_industrial_style.png",
-        "Hyperpop Style Study": "assets/images/covers/cover_hyperpop_style.png",
-        "Trance Style Study": "assets/images/covers/cover_trance_style.png",
+        "Phonk": "assets/images/covers/cover_phonk_style.png",
+        "Dub": "assets/images/covers/cover_dub_style.png",
+        "Celtic House": "assets/images/covers/cover_celtic_house.png",
+        "Disco": "assets/images/covers/cover_disco_style.png",
         "Liquid Funk": "assets/images/covers/cover_liquid_funk.png",
         "Tribal House": "assets/images/covers/cover_tribal_house.png",
         "Neo-Tokyo D&B": "assets/images/covers/cover_neotokyo_dnb.png",
@@ -97,6 +96,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (featuredCard) featuredCard.setAttribute('onclick', `window.location.href='player.html?playlist=${encodeURIComponent(displayName)}'`);
 
                 console.log(`Updated featured release to: ${displayName}`);
+            }
+
+            // --- Dynamic Grid Rendering ---
+            const coreCollectionsContainer = document.getElementById('core-collections');
+            const styleStudiesContainer = document.getElementById('core-style-studies');
+
+            if (coreCollectionsContainer && styleStudiesContainer) {
+                let collectionsHtml = '';
+                let stylesHtml = '';
+
+                data.forEach(p => {
+                    // Filter future playlists
+                    if (p.playlist_published_at) {
+                        const pDate = new Date(p.playlist_published_at);
+                        if (pDate > now) return;
+                    }
+
+                    const displayName = p.playlist_name.replace('fi4cr - ', '');
+                    const artSrc = getArtForPlaylist(displayName);
+                    // Use 'Tracks' count as subtitle since we don't have manual genres
+                    const subtitle = p.videos ? `${p.videos.length} Tracks` : 'Collection';
+                    // Safely encode for URL
+                    const encodedName = encodeURIComponent(displayName);
+
+                    const cardHtml = `
+                        <div onclick="window.location.href='player.html?playlist=${encodedName}'"
+                            class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                            <div class="absolute inset-0 bg-cover"
+                                style="background-image: url('${artSrc}');"></div>
+                            <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                            <div class="absolute bottom-0 left-0 p-8">
+                                <p class="text-white text-lg font-bold truncate">${displayName}</p>
+                                <p class="text-gray text-sm">${subtitle}</p>
+                            </div>
+                        </div>
+                    `;
+
+                    // Categorize based on "Style"
+                    if (displayName.toLowerCase().includes('style')) {
+                        stylesHtml += cardHtml;
+                    } else {
+                        collectionsHtml += cardHtml;
+                    }
+                });
+
+                coreCollectionsContainer.innerHTML = collectionsHtml;
+                styleStudiesContainer.innerHTML = stylesHtml;
             }
         })
         .catch(error => console.error('Error loading playlists for hub:', error));

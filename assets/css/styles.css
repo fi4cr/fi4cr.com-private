@@ -31,6 +31,8 @@ body {
     overflow-x: hidden;
     position: relative;
     padding-bottom: calc(var(--player-height) + 2rem);
+    /* Default Max Width for larger mobile/tablet before desktop media query kicks in? 
+       Actually, let's keep it simple. Mobile < 600px is full width. */
 }
 
 /* Background Effects */
@@ -93,8 +95,8 @@ body {
 
 .header-content {
     width: 100%;
-    max-width: 600px;
-    /* App-like max width */
+    width: 100%;
+    /* max-width controlled by media queries */
     height: 100%;
     display: flex;
     align-items: center;
@@ -156,7 +158,8 @@ body {
 /* Main Content */
 .main-content {
     width: 100%;
-    max-width: 600px;
+    width: 100%;
+    /* max-width controlled by media queries */
     margin: 0 auto;
     padding-top: var(--header-height);
     display: flex;
@@ -383,8 +386,8 @@ body {
 
 .glass-mini-player {
     width: 100%;
-    max-width: 600px;
-    height: 70px;
+    /* max-width is handled in media queries for desktop */
+    height: 100%;
     display: flex;
     align-items: center;
     padding: 0 1rem;
@@ -468,12 +471,34 @@ body {
 
     .main-content,
     .fixed-header .header-content,
-    .floating-player-container {
+    .floating-player-container,
+    .mini-progress-bar,
+    .glass-mini-player {
+        max-width: 1200px;
+        /* Widened for desktop */
         border-right: 1px solid var(--glass-border);
         border-left: 1px solid var(--glass-border);
         background-color: var(--bg-color);
         /* Original bg inside app */
+    }
 
+    /* Responsive Grid */
+    .grid-cols-2 {
+        grid-template-columns: repeat(5, 1fr);
+        /* 5 columns on desktop */
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1200px) {
+    .grid-cols-2 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+    .grid-cols-2 {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -773,6 +798,10 @@ body {
     padding: 1.25rem;
 }
 
+.p-8 {
+    padding: 2rem;
+}
+
 .py-0\.5 {
     padding-top: 0.125rem;
     padding-bottom: 0.125rem;
@@ -986,4 +1015,12 @@ body {
 
 .text-\[10px\] {
     font-size: 10px;
+}
+
+/* Desktop Hero Adjustment */
+@media (min-width: 1024px) {
+    #featured-card {
+        aspect-ratio: 21/9 !important;
+        max-height: 400px;
+    }
 }
