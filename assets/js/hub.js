@@ -60,18 +60,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const featuredCard = document.getElementById('featured-card');
     const featuredBg = document.getElementById('featured-img-bg');
 
-    fetch('assets/data/playlists.json')
+    // Use a timestamp to prevent caching of the playlist data
+    fetch(`assets/data/playlists.json?v=${new Date().getTime()}`)
         .then(response => response.json())
         .then(data => {
             const now = new Date();
+
             let latestPly = null;
             let maxDate = new Date(0);
 
+            // Helper to get the most recent *published* video date for a playlist
+            // Returns null if no videos are published yet
+            function getLatestPublishedVideoDate(playlist) {
+                if (!playlist.videos || playlist.videos.length === 0) return null;
+
+                let latest = null;
+
+                playlist.videos.forEach(v => {
+                    if (v.video_published_at) {
+                        const vDate = new Date(v.video_published_at);
+                        if (vDate <= now) {
+                            if (!latest || vDate > latest) {
+                                latest = vDate;
+                            }
+                        }
+                    }
+                });
+                return latest;
+            }
+
+            // Find Featured Release (Playlist with the most recent video)
             data.forEach(p => {
-                if (p.playlist_published_at) {
-                    const pDate = new Date(p.playlist_published_at);
-                    // Filter out future playlists matches script.js logic
-                    if (pDate <= now && pDate > maxDate) {
+                const pDate = getLatestPublishedVideoDate(p);
+
+                if (pDate) {
+                    if (pDate > maxDate) {
                         maxDate = pDate;
                         latestPly = p;
                     }
@@ -92,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (featuredBg) featuredBg.style.backgroundImage = `url('${artSrc}')`;
 
                 // Update Link
-                // Encode the playlist name to handle spaces and special chars
                 if (featuredCard) featuredCard.setAttribute('onclick', `window.location.href='player.html?playlist=${encodeURIComponent(displayName)}'`);
 
                 console.log(`Updated featured release to: ${displayName}`);
@@ -107,11 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 let stylesHtml = '';
 
                 data.forEach(p => {
-                    // Filter future playlists
-                    if (p.playlist_published_at) {
-                        const pDate = new Date(p.playlist_published_at);
-                        if (pDate > now) return;
-                    }
+                    // Filter: Only show playlists that have at least one published video
+                    const hasPublishedVideos = getLatestPublishedVideoDate(p) !== null;
+
+                    if (!hasPublishedVideos) return;
 
                     const displayName = p.playlist_name.replace('fi4cr - ', '');
                     const artSrc = getArtForPlaylist(displayName);
