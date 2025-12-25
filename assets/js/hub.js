@@ -120,6 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(`Updated featured release to: ${displayName}`);
             }
 
+
+
             // --- Dynamic Grid Rendering ---
             const coreCollectionsContainer = document.getElementById('core-collections');
             const styleStudiesContainer = document.getElementById('core-style-studies');
