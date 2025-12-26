@@ -61,6 +61,39 @@ document.addEventListener('DOMContentLoaded', () => {
         return playlistArt["default"];
     }
 
+    // --- Search Implementation ---
+    let allPlaylists = [];
+
+    const searchBtn = document.getElementById('search-btn');
+    const searchContainer = document.getElementById('search-container');
+    const searchInput = document.getElementById('search-input');
+    const closeSearchBtn = document.getElementById('close-search');
+
+    if (searchBtn && searchContainer && closeSearchBtn && searchInput) {
+        searchBtn.addEventListener('click', () => {
+            if (searchContainer.classList.contains('hidden')) {
+                searchContainer.classList.remove('hidden');
+                searchInput.focus();
+            } else {
+                searchContainer.classList.add('hidden');
+            }
+        });
+
+        closeSearchBtn.addEventListener('click', () => {
+            searchContainer.classList.add('hidden');
+            searchInput.value = '';
+            renderPlaylists(allPlaylists); // Reset view
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = allPlaylists.filter(p =>
+                p.playlist_name.toLowerCase().replace('fi4cr - ', '').includes(query)
+            );
+            renderPlaylists(filtered);
+        });
+    }
+
     const featuredTitle = document.getElementById('featured-title');
     const featuredTracks = document.getElementById('featured-tracks');
     const featuredCard = document.getElementById('featured-card');
@@ -95,6 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 return latest;
             }
 
+            // Save data for search
+            allPlaylists = data.filter(p => getLatestPublishedVideoDate(p) !== null);
+
             // Find Featured Release (Playlist with the most recent video)
             data.forEach(p => {
                 const pDate = getLatestPublishedVideoDate(p);
@@ -126,51 +162,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(`Updated featured release to: ${displayName}`);
             }
 
+            // Initial Render
+            renderPlaylists(allPlaylists);
 
-
-            // --- Dynamic Grid Rendering ---
-            const coreCollectionsContainer = document.getElementById('core-collections');
-            const styleStudiesContainer = document.getElementById('core-style-studies');
-
-            if (coreCollectionsContainer && styleStudiesContainer) {
-                let collectionsHtml = '';
-                let stylesHtml = '';
-
-                data
-                    .filter(p => getLatestPublishedVideoDate(p) !== null)
-                    .sort((a, b) => (b.videos ? b.videos.length : 0) - (a.videos ? a.videos.length : 0))
-                    .forEach(p => {
-                        const displayName = p.playlist_name.replace('fi4cr - ', '');
-                        const artSrc = getArtForPlaylist(displayName);
-                        // Use 'Tracks' count as subtitle since we don't have manual genres
-                        const subtitle = p.videos ? `${p.videos.length} Tracks` : 'Collection';
-                        // Safely encode for URL
-                        const encodedName = encodeURIComponent(displayName);
-
-                        const cardHtml = `
-                        <div onclick="window.location.href='player.html?playlist=${encodedName}'"
-                            class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
-                            <div class="absolute inset-0 bg-cover"
-                                style="background-image: url('${artSrc}');"></div>
-                            <div class="absolute inset-0 gradient-overlay-bottom"></div>
-                            <div class="absolute bottom-0 left-0 p-8">
-                                <p class="text-white text-lg font-bold truncate">${displayName}</p>
-                                <p class="text-gray text-sm">${subtitle}</p>
-                            </div>
-                        </div>
-                    `;
-
-                        // Categorize based on "Style"
-                        if (displayName.toLowerCase().includes('style')) {
-                            stylesHtml += cardHtml;
-                        } else {
-                            collectionsHtml += cardHtml;
-                        }
-                    });
-
-                coreCollectionsContainer.innerHTML = collectionsHtml;
-                styleStudiesContainer.innerHTML = stylesHtml;
-            }
         })
         .catch(error => console.error('Error loading playlists for hub:', error));
+
+    function renderPlaylists(playlists) {
+        const coreCollectionsContainer = document.getElementById('core-collections');
+        const styleStudiesContainer = document.getElementById('core-style-studies');
+
+        if (coreCollectionsContainer && styleStudiesContainer) {
+            let collectionsHtml = '';
+            let stylesHtml = '';
+
+            // Sort by track count descending
+            const sorted = [...playlists].sort((a, b) => (b.videos ? b.videos.length : 0) - (a.videos ? a.videos.length : 0));
+
+            sorted.forEach(p => {
+                const displayName = p.playlist_name.replace('fi4cr - ', '');
+                const artSrc = getArtForPlaylist(displayName);
+                // Use 'Tracks' count as subtitle since we don't have manual genres
+                const subtitle = p.videos ? `${p.videos.length} Tracks` : 'Collection';
+                // Safely encode for URL
+                const encodedName = encodeURIComponent(displayName);
+
+                const cardHtml = `
+                    <div onclick="window.location.href='player.html?playlist=${encodedName}'"
+                        class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
+                        <div class="absolute inset-0 bg-cover"
+                            style="background-image: url('${artSrc}');"></div>
+                        <div class="absolute inset-0 gradient-overlay-bottom"></div>
+                        <div class="absolute bottom-0 left-0 p-8">
+                            <p class="text-white text-lg font-bold truncate">${displayName}</p>
+                            <p class="text-gray text-sm">${subtitle}</p>
+                        </div>
+                    </div>
+                `;
+
+                // Categorize based on "Style"
+                if (displayName.toLowerCase().includes('style')) {
+                    stylesHtml += cardHtml;
+                } else {
+                    collectionsHtml += cardHtml;
+                }
+            });
+
+            coreCollectionsContainer.innerHTML = collectionsHtml;
+            styleStudiesContainer.innerHTML = stylesHtml;
+        }
+    }
 });

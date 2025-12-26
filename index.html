@@ -32,10 +32,24 @@
                 <span class="text-primary text-xs font-bold uppercase tracking-wider">fi4cr Music</span>
             </div>
         </div>
-        <div class="flex gap-4">
-            <button class="icon-btn">
-                <span class="material-symbols-outlined">search</span>
-            </button>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <div class="relative flex items-center">
+                <!-- Search Container (Positioned next to search button) -->
+                <div id="search-container"
+                    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-surface-bg/95 backdrop-blur-md rounded-2xl flex items-center px-4 py-3 hidden border border-white/10 shadow-2xl transition-all w-11/12 max-w-md">
+                    <input type="text" id="search-input" placeholder="Search..."
+                        class="bg-transparent border-none outline-none text-white w-full placeholder-gray/50 text-lg font-medium p-2">
+                    <button id="close-search" class="ml-2 text-gray hover:text-white transition-colors p-2">
+                        <span class="material-symbols-outlined text-2xl">close</span>
+                    </button>
+                </div>
+
+                <button class="icon-btn" id="search-btn">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </div>
             <button class="icon-btn">
                 <span class="material-symbols-outlined">notifications</span>
             </button>
