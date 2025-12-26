@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Shared Art Mapping (Duplicated from script.js to avoid dependency issues for now)
+    const CACHE_VERSION = '2';
     const playlistArt = {
         "Swing D&B": "assets/images/covers/cover_swing_dnb.png",
         "Ragga D&B": "assets/images/covers/cover_ragga_dnb.png",
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Celtic Trance": "assets/images/covers/cover_celtic_trance.png",
         "Neoclassical Electronic": "assets/images/covers/cover_neoclassical_electronic.png",
         "House Style": "assets/images/covers/cover_house_style.png",
+        "House Music Style Study": "assets/images/covers/cover_house_style.png",
         "Rawphoric": "assets/images/covers/cover_rawphoric.png",
         "Bubblegum Dance": "assets/images/covers/cover_bubblegum_dance.png",
         "Chiptune": "assets/images/covers/cover_chiptune_style.png",
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Breakbeat": "assets/images/covers/cover_breakbeat_style.png",
         "Ambient": "assets/images/covers/cover_ambient_style.png",
         "IDM Ambient": "assets/images/covers/cover_idm_ambient_dub.png",
+        "Intelligent Dance Music Style Study": "assets/images/covers/cover_idm_style.png",
         "Hyperbaroque": "assets/images/covers/cover_hyperbaroque_collection.png",
         "World Electronica": "assets/images/covers/cover_world_electronica_style.png",
         "UK Garage": "assets/images/covers/cover_uk_garage_style.png",
@@ -49,16 +52,23 @@ document.addEventListener('DOMContentLoaded', () => {
         "Big Room House": "assets/images/covers/cover_big_room_house.png",
         "Retro House": "assets/images/covers/cover_retro_house.png",
         "French House": "assets/images/covers/cover_french_house.png",
+        "Synthwave Style Study": "assets/images/covers/cover_synthwave_style.png",
+        "Industrial Style Study": "assets/images/covers/cover_industrial_style.png",
+        "Hyperpop Style Study": "assets/images/covers/cover_hyperpop_style.png",
+        "Trance Style Study": "assets/images/covers/cover_trance_style.png",
+        "Nu-Jazz Style Study": "assets/images/covers/cover_nu_jazz_style.png",
+        "Future Bass Style Study": "assets/images/covers/cover_future_bass_style.png",
+        "D&B Style Study": "assets/images/covers/cover_dnb_style.png",
         "default": "assets/images/covers/cover_default.png"
     };
 
     function getArtForPlaylist(name) {
         for (const [key, value] of Object.entries(playlistArt)) {
             if (name.includes(key)) {
-                return value;
+                return `${value}?v=${CACHE_VERSION}`;
             }
         }
-        return playlistArt["default"];
+        return `${playlistArt["default"]}?v=${CACHE_VERSION}`;
     }
 
     // --- Search Implementation ---
