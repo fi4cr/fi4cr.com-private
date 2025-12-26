@@ -257,10 +257,19 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             log(`Data loaded. Playlists: ${data.length}`);
+
+            // Filter out unpublished videos
+            const now = new Date();
+            data.forEach(playlist => {
+                if (playlist.videos) {
+                    playlist.videos = playlist.videos.filter(v => {
+                        if (!v.video_published_at) return true; // Assume published if no date
+                        return new Date(v.video_published_at) <= now;
+                    });
+                }
+            });
+
             allPlaylists = data;
-
-
-
             const urlParams = new URLSearchParams(window.location.search);
             const playlistParam = urlParams.get('playlist');
             let defaultIndex = -1;

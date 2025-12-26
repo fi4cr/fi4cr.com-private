@@ -105,6 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             const now = new Date();
 
+            // Filter out unpublished videos immediately
+            data.forEach(playlist => {
+                if (playlist.videos) {
+                    playlist.videos = playlist.videos.filter(v => {
+                        if (!v.video_published_at) return true;
+                        return new Date(v.video_published_at) <= now;
+                    });
+                }
+            });
+
             let latestPly = null;
             let maxDate = new Date(0);
 
