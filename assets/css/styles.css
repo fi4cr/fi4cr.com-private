@@ -1024,3 +1024,41 @@ body {
         max-height: 400px;
     }
 }
+
+/* Missing Utilities for Notifications/Search */
+.hidden {
+    display: none !important;
+}
+
+.bg-notification {
+    background-color: rgba(43, 25, 51, 0.95);
+    backdrop-filter: blur(12px);
+}
+
+.top-full {
+    top: 100%;
+}
+
+.right-0 {
+    right: 0;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.z-50 {
+    z-index: 50;
+}
+
+.w-80 {
+    width: 20rem;
+}
+
+.max-h-\[60vh\] {
+    max-height: 60vh;
+}
+
+.overflow-y-auto {
+    overflow-y: auto;
+}

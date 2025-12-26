@@ -12,7 +12,7 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=2">
+    <link rel="stylesheet" href="assets/css/styles.css?v=3">
     <style>
         /* Scoped override if needed, but styles.css should cover it */
     </style>
@@ -50,9 +50,19 @@
                     <span class="material-symbols-outlined">search</span>
                 </button>
             </div>
-            <button class="icon-btn">
-                <span class="material-symbols-outlined">notifications</span>
-            </button>
+            <div class="relative">
+                <button class="icon-btn" id="notification-btn">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+
+                <!-- Notification Dropdown -->
+                <div id="notification-container"
+                    class="absolute top-full right-0 mt-2 z-50 bg-notification rounded-xl hidden border border-white/10 shadow-2xl w-80 max-h-[60vh] overflow-y-auto">
+                    <div id="notification-list" class="p-2 flex flex-col gap-1">
+                        <!-- Notifications will be injected here -->
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
