@@ -13,6 +13,13 @@ A functional, audio-first music frontend featuring a curated collection of elect
 - **Custom Cover Art**: Unique, AI-generated abstract artwork for each collection.
 - **YouTube Integration**: Embeds YouTube videos seamlessly using the IFrame API.
 - **Random Autoplay**: Automatically selects a random track on load and on playlist switch.
+- **Smart Sorting**: Playlists are dynamically sorted by track count to highlight the most complete collections.
+- **Fallback Art**: Graceful degradation to a default abstract cover (`cover_default.png`) if a specific genre cover is missing.
+
+## Album Art Prompts
+
+The album art is generated using the following prompt template:
+> A cool, abstract, text-free album cover for '[Genre Name]'. [Visual Descriptors]. High quality. No text.
 
 ## Tech Stack
 

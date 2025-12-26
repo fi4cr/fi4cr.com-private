@@ -74,7 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
         "Hyperpop Style Study": "assets/images/covers/cover_hyperpop_style.png",
         "Trance Style Study": "assets/images/covers/cover_trance_style.png",
         "Bluestep Collection": "assets/images/covers/cover_bluestep_collection.png",
-        "default": "assets/images/covers/cover_swing_dnb.png"
+        "Nu-Jazz": "assets/images/covers/cover_nu_jazz_style.png",
+        "Future Bass": "assets/images/covers/cover_future_bass_style.png",
+        "Electronic Rock": "assets/images/covers/cover_electronic_rock_style.png",
+        "Balkan Tech House": "assets/images/covers/cover_balkan_tech_house.png",
+        "Neoclassical Hip Hop": "assets/images/covers/cover_neoclassical_hiphop.png",
+        "Baroque Minimal Techno": "assets/images/covers/cover_baroque_minimal_techno.png",
+        "Colour Bass": "assets/images/covers/cover_colour_bass.png",
+        "Glitch Hop": "assets/images/covers/cover_glitch_hop.png",
+        "Big Room House": "assets/images/covers/cover_big_room_house.png",
+        "Retro House": "assets/images/covers/cover_retro_house.png",
+        "French House": "assets/images/covers/cover_french_house.png",
+        "default": "assets/images/covers/cover_default.png"
     };
 
     function getArtForPlaylist(name) {

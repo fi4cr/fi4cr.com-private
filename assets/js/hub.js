@@ -43,7 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
         "Rave House": "assets/images/covers/cover_rave_house.png",
         "Progressive House": "assets/images/covers/cover_progressive_house.png",
         "Bluestep Collection": "assets/images/covers/cover_bluestep_collection.png",
-        "default": "assets/images/covers/cover_swing_dnb.png"
+        "Baroque Minimal Techno": "assets/images/covers/cover_baroque_minimal_techno.png",
+        "Colour Bass": "assets/images/covers/cover_colour_bass.png",
+        "Glitch Hop": "assets/images/covers/cover_glitch_hop.png",
+        "Big Room House": "assets/images/covers/cover_big_room_house.png",
+        "Retro House": "assets/images/covers/cover_retro_house.png",
+        "French House": "assets/images/covers/cover_french_house.png",
+        "default": "assets/images/covers/cover_default.png"
     };
 
     function getArtForPlaylist(name) {
@@ -130,20 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 let collectionsHtml = '';
                 let stylesHtml = '';
 
-                data.forEach(p => {
-                    // Filter: Only show playlists that have at least one published video
-                    const hasPublishedVideos = getLatestPublishedVideoDate(p) !== null;
+                data
+                    .filter(p => getLatestPublishedVideoDate(p) !== null)
+                    .sort((a, b) => (b.videos ? b.videos.length : 0) - (a.videos ? a.videos.length : 0))
+                    .forEach(p => {
+                        const displayName = p.playlist_name.replace('fi4cr - ', '');
+                        const artSrc = getArtForPlaylist(displayName);
+                        // Use 'Tracks' count as subtitle since we don't have manual genres
+                        const subtitle = p.videos ? `${p.videos.length} Tracks` : 'Collection';
+                        // Safely encode for URL
+                        const encodedName = encodeURIComponent(displayName);
 
-                    if (!hasPublishedVideos) return;
-
-                    const displayName = p.playlist_name.replace('fi4cr - ', '');
-                    const artSrc = getArtForPlaylist(displayName);
-                    // Use 'Tracks' count as subtitle since we don't have manual genres
-                    const subtitle = p.videos ? `${p.videos.length} Tracks` : 'Collection';
-                    // Safely encode for URL
-                    const encodedName = encodeURIComponent(displayName);
-
-                    const cardHtml = `
+                        const cardHtml = `
                         <div onclick="window.location.href='player.html?playlist=${encodedName}'"
                             class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
                             <div class="absolute inset-0 bg-cover"
@@ -156,13 +160,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     `;
 
-                    // Categorize based on "Style"
-                    if (displayName.toLowerCase().includes('style')) {
-                        stylesHtml += cardHtml;
-                    } else {
-                        collectionsHtml += cardHtml;
-                    }
-                });
+                        // Categorize based on "Style"
+                        if (displayName.toLowerCase().includes('style')) {
+                            stylesHtml += cardHtml;
+                        } else {
+                            collectionsHtml += cardHtml;
+                        }
+                    });
 
                 coreCollectionsContainer.innerHTML = collectionsHtml;
                 styleStudiesContainer.innerHTML = stylesHtml;
