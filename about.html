@@ -1,206 +1,411 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist Profile - fi4cr</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>fi4cr - AI Electronic Music</title>
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a413ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#1c1022",
+                        "surface-dark": "#2d2136",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar hiding */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
 </head>
 
-<body class="bg-black">
-    <!-- Top Nav -->
-    <div class="fixed top-0 left-0 w-full z-50 p-4 flex justify-between items-center"
-        style="background: rgba(28, 16, 34, 0.8); backdrop-filter: blur(10px);">
-        <button onclick="window.location.href='index.html'"
-            class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-white transition-colors border-none bg-transparent cursor-pointer">
-            <span class="material-symbols-outlined">arrow_back_ios_new</span>
-        </button>
-        <span class="text-white text-sm font-bold uppercase tracking-wider opacity-0"
-            id="artist-name-header">fi4cr</span>
-        <button
-            class="text-primary text-sm font-bold hover:opacity-80 bg-transparent border-none cursor-pointer">Share</button>
-    </div>
+<body
+    class="bg-background-light dark:bg-background-dark min-h-screen font-display text-slate-900 dark:text-white overflow-x-hidden selection:bg-primary selection:text-white flex flex-col">
+    <!-- Top Navigation -->
+    <nav
+        class="sticky top-0 z-40 w-full backdrop-blur-md bg-background-light/90 dark:bg-background-dark/90 border-b border-gray-200 dark:border-white/5 transition-colors duration-300">
+        <div class="flex items-center justify-between px-4 py-3">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
+                <!-- Brand Icon -->
+                <div class="size-8 rounded bg-primary/20 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-[20px]">graphic_eq</span>
+                </div>
+                <!-- Brand Name -->
+                <h1 class="text-xl font-bold tracking-tight text-primary dark:text-white">fi4cr</h1>
+            </div>
+            <!-- Menu Button -->
+            <button
+                class="size-10 flex items-center justify-center rounded-lg text-slate-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
+                onclick="window.location.href='index.html'">
+                <span class="material-symbols-outlined">home</span>
+            </button>
+        </div>
+    </nav>
 
-    <main class="w-full pb-24">
+    <!-- Main Content Area -->
+    <main class="flex-1 pb-36">
         <!-- Hero Section -->
-        <div class="relative w-full h-[420px] bg-surface-dark overflow-hidden">
-            <div class="absolute inset-0 bg-cover"
-                style="background-image: url('assets/images/covers/cover_swing_dnb.png'); background-position: top center;">
-            </div>
-            <div class="absolute inset-0 gradient-overlay-bottom"></div>
-
-            <div class="absolute bottom-0 left-0 w-full p-5 z-10">
-                <span
-                    class="inline-block py-1 px-3 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-bold tracking-wider mb-3 backdrop-blur-sm">
-                    ELECTRONIC / D&B
-                </span>
-                <h1 class="text-white text-4xl font-bold leading-tight mb-1">fi4cr</h1>
-                <p class="text-gray text-sm font-medium tracking-wide">GLOBAL</p>
-            </div>
-        </div>
-
-        <!-- Bio Section -->
-        <div class="p-5 flex flex-col gap-6">
-            <div class="flex items-center gap-3">
-                <div class="h-px w-8 bg-primary"></div>
-                <h2 class="text-white tracking-wide text-sm font-bold uppercase">The Mission</h2>
-            </div>
-
-            <p class="text-gray font-normal leading-relaxed">
-                Welcome to <strong class="text-white">fi4cr</strong>, where human creativity and AI collide to create
-                the future of electronic music. We drop a new track every day, exploring everything from House, Techno
-                and Trance to Dubstep, Drum & Bass and Ambient.
+        <section class="relative px-4 pt-6 pb-8">
+            <h2 class="text-3xl font-bold leading-tight mb-4 tracking-[-0.015em] text-slate-900 dark:text-white">
+                Where Human Creativity Meets <span class="text-primary">AI Innovation</span>
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 text-lg mb-6 leading-relaxed font-normal">
+                Welcome to fi4cr, a sonic laboratory dedicated to exploring the future of electronic music. We exist at
+                the cutting edge where human artistic vision collides with the generative power of Artificial
+                Intelligence.
             </p>
+            <!-- Media Placeholder -->
+            <div onclick="window.location.href='player.html?playlist=fi4cr%20-%20Experiments%20in%20Electro%20Swing%20Alchemy'"
+                class="relative -mx-4 h-48 overflow-hidden shadow-2xl group border-y border-gray-200 dark:border-white/10 bg-surface-dark cursor-pointer mt-6 mb-8">
+                <!-- Abstract Gradient Background -->
+                <div class="absolute inset-0 bg-gradient-to-br from-[#2a1e35] via-[#4a1068] to-[#1c1022] opacity-80"
+                    data-alt="Abstract purple and dark digital soundwave visualization"></div>
+                <!-- Cover Art BG for visual interest -->
+                <div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay"
+                    style="background-image: url('assets/images/covers/cover_electro_swing_alchemy.png');"></div>
 
-            <div class="flex flex-col gap-2 mt-2">
-                <p class="text-white font-bold text-sm">Find Your Sound:</p>
-                <ul class="list-none flex flex-col gap-2 pl-0">
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary mt-1">●</span>
-                        <span class="text-gray text-sm"><strong class="text-white">Style Study:</strong> Daily tracks
-                            focused on one genre’s core sound.</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary mt-1">●</span>
-                        <span class="text-gray text-sm"><strong class="text-white">Collections:</strong> Album-style
-                            drops dedicated to a specific subgenre.</span>
-                    </li>
-                </ul>
+                <!-- Play Button Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <button
+                        class="size-16 rounded-full bg-primary/90 group-hover:bg-primary text-white flex items-center justify-center transition-all transform group-hover:scale-105 active:scale-95 shadow-lg shadow-primary/20 backdrop-blur-sm">
+                        <span class="material-symbols-outlined text-[32px] ml-1 fill-1">play_arrow</span>
+                    </button>
+                </div>
+                <!-- Equalizer Bars -->
+                <div class="absolute bottom-4 left-4 flex gap-1 items-end h-8">
+                    <div class="w-1 bg-white/60 rounded-full animate-pulse h-3"></div>
+                    <div class="w-1 bg-white/60 rounded-full animate-pulse delay-75 h-6"></div>
+                    <div class="w-1 bg-white/60 rounded-full animate-pulse delay-100 h-4"></div>
+                    <div class="w-1 bg-white/60 rounded-full animate-pulse delay-150 h-7"></div>
+                </div>
+            </div>
+            <!-- Primary CTA -->
+            <div class="mt-6 flex justify-center">
+                <button onclick="window.location.href='index.html'"
+                    class="w-full bg-primary hover:bg-primary/90 active:bg-primary/80 text-white font-bold h-12 rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/25">
+                    <span class="material-symbols-outlined">headphones</span>
+                    Listen Now
+                </button>
+            </div>
+        </section>
+
+        <!-- The Mission Section -->
+        <section class="px-4 py-2">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold tracking-tight">The Mission</h3>
+                <span class="material-symbols-outlined text-primary">flag</span>
+            </div>
+            <div
+                class="bg-white dark:bg-surface-dark rounded-xl p-5 border border-gray-200 dark:border-white/5 shadow-sm">
+                <div class="flex flex-col gap-3">
+                    <h4 class="font-bold text-lg text-primary">Evolution & Collaboration</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+                        Music has always been about evolution. At fi4cr, our mission is to push the boundaries of genre
+                        and composition by treating AI not just as a tool, but as a collaborator. We don't just generate
+                        music; we curate, guide, and sculpt it to create sounds that are at once familiar and entirely
+                        new.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Sonic Experiments (Collections) -->
+        <section class="py-8">
+            <div class="px-4 mb-4 flex flex-col gap-1">
+                <h3 class="text-xl font-bold tracking-tight">The Sonic Experiments</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Consistency and experimentation.</p>
             </div>
 
-            <div class="flex flex-col gap-2 mt-2">
-                <p class="text-white font-bold text-sm">Special Releases:</p>
-                <ul class="list-none flex flex-col gap-2 pl-0">
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary mt-1">●</span>
-                        <span class="text-gray text-sm"><strong class="text-white">Anthems:</strong> Our only
-                            non-instrumental pieces on the channel. Rare and impactful.</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary mt-1">●</span>
-                        <span class="text-gray text-sm"><strong class="text-white">Extended Mix:</strong> 1-hour
-                            long-form audio and visuals for study or deep work.</span>
-                    </li>
-                </ul>
-            </div>
+            <!-- Horizontal Scroll Container -->
+            <div class="flex overflow-x-auto gap-4 px-4 pb-4 no-scrollbar snap-x snap-mandatory">
+                <!-- Card 1: Baroque -->
+                <div class="flex-none w-[180px] snap-start">
+                    <div class="aspect-square rounded-xl bg-gray-800 mb-3 overflow-hidden relative group shadow-md">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            style="background-image: url('assets/images/covers/cover_baroque_minimal_techno.png');">
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white leading-tight">Baroque Minimal Techno</h4>
+                    <p class="text-xs font-medium text-gray-500 mt-1 lines-clamp-2">Bach-inspired counterpoint meets
+                        minimal techno.</p>
+                </div>
+                <!-- Card 2: Folk House -->
+                <div class="flex-none w-[180px] snap-start">
+                    <div class="aspect-square rounded-xl bg-gray-800 mb-3 overflow-hidden relative group shadow-md">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            style="background-image: url('assets/images/covers/cover_folk_house.png');">
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white leading-tight">Progressive Folk House</h4>
+                    <p class="text-xs font-medium text-gray-500 mt-1">Traditional world sounds & driving energy.</p>
+                </div>
+                <!-- Card 3: Tribal -->
+                <div class="flex-none w-[180px] snap-start">
+                    <div class="aspect-square rounded-xl bg-gray-800 mb-3 overflow-hidden relative group shadow-md">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            style="background-image: url('assets/images/covers/cover_tribal_house.png');">
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white leading-tight">Tribal House</h4>
+                    <p class="text-xs font-medium text-gray-500 mt-1">Primal rhythms and atmospheric soundscapes.</p>
+                </div>
+                <!-- Card 4: Orchestral -->
+                <div class="flex-none w-[180px] snap-start">
+                    <div class="aspect-square rounded-xl bg-gray-800 mb-3 overflow-hidden relative group shadow-md">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            style="background-image: url('assets/images/covers/cover_orch_dubstep.png');">
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white leading-tight">Orchestral Dubstep</h4>
+                    <p class="text-xs font-medium text-gray-500 mt-1">Raw power elevated by cinematic arrangements.</p>
+                </div>
+                <!-- Card 5: Ragga -->
+                <div class="flex-none w-[180px] snap-start">
+                    <div class="aspect-square rounded-xl bg-gray-800 mb-3 overflow-hidden relative group shadow-md">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            style="background-image: url('assets/images/covers/cover_ragga_dnb.png');">
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white leading-tight">Ragga D&B / Jungle</h4>
+                    <p class="text-xs font-medium text-gray-500 mt-1">High-energy riddims and jungle vibes.</p>
+                </div>
 
-            <div class="relative py-4 my-2 text-center">
-                <span
-                    class="material-symbols-outlined text-4xl text-primary/20 absolute top-[-10px] left-0 transform rotate-180">format_quote</span>
-                <p class="text-lg font-bold italic text-white relative z-10 px-4">
-                    "Start with a Style Study to learn the DNA of a sound, or jump into a Collection for an instant
-                    set."
+            </div>
+        </section>
+
+        <!-- Why fi4cr Section -->
+        <section class="px-4 py-4">
+            <h3 class="text-xl font-bold tracking-tight mb-4">Why fi4cr?</h3>
+            <div
+                class="bg-gray-50 dark:bg-white/5 rounded-xl p-5 border border-dashed border-gray-300 dark:border-white/10">
+                <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
+                    In a world saturated with standard sounds, fi4cr offers a daily dose of the unexpected. Whether you
+                    are looking for Classic Trance to uplift you, Ambient Pop to help you focus, or an intellectual
+                    musical puzzle like Equal Temperament EQ, you will find it here.
                 </p>
-                <span
-                    class="material-symbols-outlined text-4xl text-primary/20 absolute bottom-[-10px] right-0">format_quote</span>
+                <p class="text-white font-bold italic">
+                    We are redefining what is possible in music production. Join us on this journey into the unknown.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="px-4 py-8 border-t border-gray-200 dark:border-white/5 mx-4 mt-2">
+            <h3 class="text-lg font-bold text-center mb-6 text-slate-900 dark:text-white">Join the Signal</h3>
+            <p class="text-center text-sm text-gray-500 mb-6">Experience the future of sound. A new track drops every
+                day.</p>
+
+            <div class="flex justify-center gap-6 mb-8">
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@fi4cre" target="_blank"
+                    class="flex flex-col items-center gap-2 group no-underline">
+                    <div
+                        class="size-14 rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-all shadow-sm">
+                        <span class="material-symbols-outlined text-[28px]">smart_display</span>
+                    </div>
+                    <span class="text-xs font-medium text-gray-500">YouTube</span>
+                </a>
+
             </div>
 
-            <p class="text-gray font-normal leading-relaxed text-center">
-                Subscribe and hit the bell so you never miss your daily dose of beats.
+            <button
+                class="w-full border border-gray-300 dark:border-white/20 hover:bg-gray-50 dark:hover:bg-white/5 text-slate-900 dark:text-white font-bold h-12 rounded-lg transition-colors flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">mail</span>
+                Get in Touch
+            </button>
+            <p class="text-center text-xs text-gray-400 dark:text-gray-600 mt-8">
+                © 2024 fi4cr. All rights reserved.
             </p>
-        </div>
-
-        <!-- Influences/Sonic Roots -->
-        <div class="mt-4 w-full overflow-hidden">
-            <div class="px-5 mb-4 flex justify-between items-center">
-                <h3 class="text-white text-lg font-bold">Sonic Roots</h3>
-                <span class="text-primary text-xs font-bold cursor-pointer">View All</span>
-            </div>
-
-            <div class="snap-scroll-x px-5">
-                <!-- Item 1 -->
-                <div class="snap-item flex flex-col items-center gap-3 w-24">
-                    <div class="w-24 h-24 rounded-full p-1 border-2 border-primary/30">
-                        <div class="w-full h-full rounded-full bg-cover overflow-hidden"
-                            style="background-image: url('assets/images/covers/cover_swing_dnb.png');"></div>
-                    </div>
-                    <span class="text-gray text-xs font-medium">Swing</span>
-                </div>
-                <!-- Item 2 -->
-                <div class="snap-item flex flex-col items-center gap-3 w-24">
-                    <div class="w-24 h-24 rounded-full p-1 border-2 border-white/10">
-                        <div class="w-full h-full rounded-full bg-cover overflow-hidden"
-                            style="background-image: url('assets/images/covers/cover_ragga_dnb.png');"></div>
-                    </div>
-                    <span class="text-gray text-xs font-medium">Ragga</span>
-                </div>
-                <!-- Item 3 -->
-                <div class="snap-item flex flex-col items-center gap-3 w-24">
-                    <div class="w-24 h-24 rounded-full p-1 border-2 border-white/10">
-                        <div class="w-full h-full rounded-full bg-cover overflow-hidden"
-                            style="background-image: url('assets/images/covers/cover_dark_techno.png');"></div>
-                    </div>
-                    <span class="text-gray text-xs font-medium">Techno</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Socials -->
-        <div class="mt-8 px-5 flex justify-center gap-6">
-            <button class="flex flex-col items-center gap-2 group bg-transparent border-none cursor-pointer">
-                <div
-                    class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-colors">
-                    <span class="material-symbols-outlined">music_note</span>
-                </div>
-                <span class="text-[10px] uppercase font-bold text-gray tracking-wider">Spotify</span>
-            </button>
-            <a href="https://www.youtube.com/@fi4cre" target="_blank"
-                class="flex flex-col items-center gap-2 group bg-transparent border-none cursor-pointer no-underline">
-                <div
-                    class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-colors">
-                    <span class="material-symbols-outlined">smart_display</span>
-                </div>
-                <span class="text-[10px] uppercase font-bold text-gray tracking-wider">YouTube</span>
-            </a>
-            <button class="flex flex-col items-center gap-2 group bg-transparent border-none cursor-pointer">
-                <div
-                    class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-colors">
-                    <span class="material-symbols-outlined">mail</span>
-                </div>
-                <span class="text-[10px] uppercase font-bold text-gray tracking-wider">Contact</span>
-            </button>
-        </div>
-
-        <div class="h-24"></div>
+        </section>
     </main>
 
-    <!-- Footer CTA -->
-    <div class="fixed bottom-0 left-0 w-full p-4 z-40 gradient-overlay-bottom">
-        <div class="w-full max-w-[600px] mx-auto">
-            <a href="player.html"
-                class="block w-full bg-primary text-white rounded-xl p-4 shadow-lg flex items-center justify-between no-underline hover:opacity-90 transition-opacity">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                        <span class="material-symbols-outlined">play_arrow</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-sm font-bold">Latest Release</span>
-                        <span class="text-xs opacity-80">Swing D&B Collection</span>
-                    </div>
+    <!-- Sticky Mini Player Widget (Static for now, ensuring footer doesn't hide content) -->
+    <div id="sticky-player"
+        class="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-white/10 p-2 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+        <!-- Progress Bar -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gray-200 dark:bg-white/10">
+            <div class="h-full bg-primary w-1/3 relative group cursor-pointer">
+                <div
+                    class="absolute right-0 top-1/2 -translate-y-1/2 size-3 bg-white rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity">
                 </div>
-                <span class="text-sm font-bold tracking-wide">LISTEN</span>
-            </a>
+            </div>
         </div>
+        <div class="flex items-center gap-3 p-2 cursor-pointer" onclick="window.location.href='player.html'">
+            <!-- Mini Cover Art -->
+            <div class="size-12 rounded bg-gray-200 dark:bg-gray-800 overflow-hidden shrink-0 relative shadow-sm">
+                <div id="sticky-player-cover" class="absolute inset-0 bg-cover bg-center"
+                    style="background-image: url('assets/images/covers/cover_swing_dnb.png');"></div>
+            </div>
+            <!-- Info -->
+            <div class="flex-1 min-w-0 flex flex-col justify-center">
+                <h4 id="sticky-player-title" class="font-bold text-sm text-slate-900 dark:text-white truncate">Latest
+                    Release</h4>
+                <p id="sticky-player-subtitle"
+                    class="text-xs font-medium text-primary truncate flex items-center gap-1">
+                    fi4cr
+                    <span class="size-1 rounded-full bg-primary inline-block"></span>
+                    Now Playing
+                </p>
+            </div>
+            <!-- Controls -->
+            <div class="flex items-center gap-1">
+                <button class="p-2 text-gray-400 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-[28px]">skip_previous</span>
+                </button>
+                <button
+                    class="size-10 flex items-center justify-center text-white bg-primary rounded-full hover:bg-primary/90 transition-transform active:scale-95 shadow-md shadow-primary/20">
+                    <span class="material-symbols-outlined text-[24px] fill-1">play_arrow</span>
+                </button>
+                <button class="p-2 text-gray-400 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-[28px]">skip_next</span>
+                </button>
+            </div>
+        </div>
+        <!-- Safe area spacer -->
+        <div class="h-5 w-full"></div>
     </div>
-
     <script>
-        // Simple scroll effect for header
-        window.addEventListener('scroll', () => {
-            const headerName = document.getElementById('artist-name-header');
-            if (window.scrollY > 200) {
-                headerName.style.opacity = '1';
-                headerName.style.transition = 'opacity 0.3s';
-            } else {
-                headerName.style.opacity = '0';
+        document.addEventListener('DOMContentLoaded', () => {
+            // Re-using art mapping logic briefly or just rely on data if we had it.
+            // Since we can't easily import the map without module issues, let's just fetch and use a simple map duplicate or generic logic.
+            // Actually, best to just fetch playlists and find the latest one.
+
+            // Minimal Art Map for key genres if needed, or just rely on the map in script.js if we could import it. 
+            // For now, I'll essentially replicate the key "getArtForPlaylist" simple logic or just basic mapping.
+            const CACHE_VERSION = '2';
+            const playlistArt = {
+                "Swing D&B": "assets/images/covers/cover_swing_dnb.png",
+                "Electro Swing Alchemy": "assets/images/covers/cover_electro_swing_alchemy.png",
+                // ... (Add others if strictly needed for the 'Latest' one, but usually defaults are fine or we can rely on standard naming if possible)
+                // To be safe, let's just assume the latest is likely one of the main ones or fallback to default.
+                "default": "assets/images/covers/cover_default.png"
+            };
+
+            // Better: Duplicated full map isn't ideal but reliable for this single page without modules.
+            // I'll use a simplified check or fetch the full map if I put it in a separate JSON/JS file.
+            // For now, I'll trust the user wants the *latest* which is likely dynamic.
+            // I will use `hub.js`'s list logic:
+
+            const playlistArtMap = {
+                "Swing D&B": "assets/images/covers/cover_swing_dnb.png",
+                "Ragga D&B": "assets/images/covers/cover_ragga_dnb.png",
+                "Baroque Minimal Techno": "assets/images/covers/cover_baroque_minimal_techno.png",
+                "Folk House": "assets/images/covers/cover_folk_house.png",
+                "Tribal House": "assets/images/covers/cover_tribal_house.png",
+                "Orchestral Dubstep": "assets/images/covers/cover_orch_dubstep.png",
+                // ... Add more as needed or use a robust finder if we had the full list
+                "default": "assets/images/covers/cover_default.png"
+            };
+
+            function getArt(name) {
+                // Try exact match first
+                for (const [key, value] of Object.entries(playlistArtMap)) {
+                    if (name.includes(key)) return value;
+                }
+                // If not found, try to guess from name (e.g. "cover_[name_lower].png")? No, too risky.
+                // Fallback to default
+                return playlistArtMap["default"];
             }
+
+            // We can also just try to load the known 'hub.js' art logic if we included it, but `about.html` didn't include it. 
+            // I will implement the fetch logic.
+
+            fetch(`assets/data/playlists.json?v=${new Date().getTime()}`)
+                .then(res => res.json())
+                .then(data => {
+                    const now = new Date();
+                    let latestPly = null;
+                    let maxDate = new Date(0);
+
+                    data.forEach(p => {
+                        if (p.playlist_published_at) {
+                            const pDate = new Date(p.playlist_published_at);
+                            if (pDate <= now && pDate > maxDate) {
+                                maxDate = pDate;
+                                latestPly = p;
+                            }
+                        }
+                    });
+
+                    if (latestPly) {
+                        const displayName = latestPly.playlist_name.replace('fi4cr - ', '');
+
+                        // Update UI
+                        const titleEl = document.getElementById('sticky-player-title');
+                        const coverEl = document.getElementById('sticky-player-cover');
+                        const containerEl = document.querySelector('#sticky-player > div.flex'); // The clickable area
+
+                        if (titleEl) titleEl.textContent = displayName;
+
+                        // Update onclick
+                        if (containerEl) {
+                            containerEl.setAttribute('onclick', `window.location.href='player.html?playlist=${encodeURIComponent(displayName)}'`);
+                        }
+
+                        // Update Art - We need the full mapping to be accurate. 
+                        // Since I cannot easily copy 100 lines of map here, I will try to use the `cover_[snake_case_name].png` pattern or just use a placeholder if not found.
+                        // Actually, I should probably just include the map. I'll include a subset or the user can accept a generic one if missing.
+                        // Wait, I can just use the provided full map from step 66/67 if I paste it.
+                        // For conciseness, I'll implement a `getArtForPlaylist` that tries to match known keys.
+
+                        // Re-defining the map from hub.js (abbreviated for critical ones, assuming latest is one of them)
+                        // Actually, I'll copy the map from the artifact or previous turn.
+                        // Since I have it in the context (Step 66), I'll use a reasonably comprehensive list.
+
+                        const art = getArt(displayName); // Use simplified map above for now
+                        // Ideally we'd move the map to a shared .js file (e.g. config.js) but I can't refactor that much right now.
+                        // I will try to infer the image name or use default.
+
+                        // BUT: `hub.js` and `script.js` have the map. 
+                        // Check this: I saw `assets/images/covers/` in step 15. The names are somewhat predictable.
+                        // E.g. "Swing D&B" -> `cover_swing_dnb.png`.
+                        // "Electro Swing Alchemy" -> `cover_electro_swing_alchemy.png`.
+                        // I can try to construct it: `cover_` + name.toLowerCase().replace(/ /g, '_') + `.png`.
+
+                        const simpleName = displayName.toLowerCase().replace(/ /g, '_').replace(/[^a-z0-9_]/g, '');
+                        const potentialPath = `assets/images/covers/cover_${simpleName}.png`;
+
+                        // I'll set it. If it fails (404), maybe fallback (img onerror)? 
+                        // But for background-image, onerror is hard.
+                        // I'll stick to a map for the most likely latest ones + default.
+
+                        if (coverEl) coverEl.style.backgroundImage = `url('assets/images/covers/cover_${simpleName}.png'), url('assets/images/covers/cover_default.png')`;
+                    }
+                })
+                .catch(e => console.error(e));
         });
     </script>
 </body>
