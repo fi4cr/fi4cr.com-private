@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Shared Art Mapping (Duplicated from script.js to avoid dependency issues for now)
+    // Shared Art Mapping
     const CACHE_VERSION = '2';
     const playlistArt = {
         "Swing D&B": "assets/images/covers/cover_swing_dnb.png",
@@ -74,34 +74,111 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Search Implementation ---
     let allPlaylists = [];
 
-    const searchBtn = document.getElementById('search-btn');
-    const searchContainer = document.getElementById('search-container');
+    // Updated selectors for new design
+    const mobileSearchBtn = document.getElementById('mobile-search-btn');
     const searchInput = document.getElementById('search-input');
-    const closeSearchBtn = document.getElementById('close-search');
 
-    if (searchBtn && searchContainer && closeSearchBtn && searchInput) {
-        searchBtn.addEventListener('click', () => {
-            if (searchContainer.classList.contains('hidden')) {
-                searchContainer.classList.remove('hidden');
+    // Desktop input is wrapped in a div with "hidden md:flex". We might want to toggle this on mobile.
+    // However, the simplest way to support mobile search with the current markup is to 
+    // toggle the visibility of the search input wrapper when the mobile button is clicked.
+    const searchInputWrapper = searchInput ? searchInput.parentElement : null;
+
+    if (mobileSearchBtn && searchInputWrapper) {
+        mobileSearchBtn.addEventListener('click', () => {
+            // Toggle visibility classes
+            searchInputWrapper.classList.toggle('hidden');
+            searchInputWrapper.classList.toggle('flex');
+            searchInputWrapper.classList.toggle('absolute'); // Position absolutely on mobile?
+            searchInputWrapper.classList.toggle('top-16');
+            searchInputWrapper.classList.toggle('right-6');
+            searchInputWrapper.classList.toggle('z-50');
+
+            if (!searchInputWrapper.classList.contains('hidden')) {
                 searchInput.focus();
-            } else {
-                searchContainer.classList.add('hidden');
             }
         });
+    }
 
-        closeSearchBtn.addEventListener('click', () => {
-            searchContainer.classList.add('hidden');
-            searchInput.value = '';
-            renderPlaylists(allPlaylists); // Reset view
+    if (searchInput) {
+        // Toggle input helper for mobile
+        searchInput.addEventListener('focus', () => {
+            const query = searchInput.value.toLowerCase();
+            if (query.length > 0) {
+                const filtered = allPlaylists.filter(p =>
+                    p.playlist_name.toLowerCase().replace('fi4cr - ', '').includes(query)
+                );
+                renderSearchResults(filtered);
+            }
         });
 
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase();
+            const searchContainer = document.getElementById('search-container');
+
+            if (query.length === 0) {
+                if (searchContainer) searchContainer.classList.add('hidden');
+                return;
+            }
+
             const filtered = allPlaylists.filter(p =>
                 p.playlist_name.toLowerCase().replace('fi4cr - ', '').includes(query)
             );
-            renderPlaylists(filtered);
+            renderSearchResults(filtered);
         });
+
+        // Close search when clicking outside
+        document.addEventListener('click', (e) => {
+            const searchContainer = document.getElementById('search-container');
+            const searchWrapper = searchInput.parentElement;
+
+            if (searchContainer && !searchContainer.classList.contains('hidden')) {
+                if (!searchContainer.contains(e.target) && !searchInput.contains(e.target)) {
+                    searchContainer.classList.add('hidden');
+                }
+            }
+        });
+    }
+
+    function renderSearchResults(playlists) {
+        const searchContainer = document.getElementById('search-container');
+        if (!searchContainer) return;
+
+        searchContainer.innerHTML = '';
+        searchContainer.classList.remove('hidden');
+
+        if (playlists.length === 0) {
+            searchContainer.innerHTML = `
+                <div class="p-4 text-center text-gray-400 text-sm">
+                    No collections found
+                </div>
+            `;
+            return;
+        }
+
+        const list = document.createElement('div');
+        list.className = 'flex flex-col py-2';
+
+        playlists.slice(0, 6).forEach(p => { // Limit to 6 results
+            const displayName = p.playlist_name.replace('fi4cr - ', '');
+            const artSrc = getArtForPlaylist(displayName);
+            const trackCount = p.videos ? p.videos.length : 0;
+            const encodedName = encodeURIComponent(displayName);
+
+            const item = document.createElement('a');
+            item.href = `player.html?playlist=${encodedName}`;
+            item.className = 'flex items-center gap-3 px-4 py-2 hover:bg-white/5 transition-colors group';
+            item.innerHTML = `
+                <img src="${artSrc}" alt="${displayName}" class="w-10 h-10 rounded-md object-cover">
+                <div class="flex-1 min-w-0">
+                    <p class="text-white text-sm font-medium truncate group-hover:text-primary transition-colors">${displayName}</p>
+                    <p class="text-gray-500 text-xs truncate">${trackCount} tracks</p>
+                </div>
+                <span class="material-icons-outlined text-gray-600 group-hover:text-white text-sm">arrow_forward</span>
+             `;
+            list.appendChild(item);
+        });
+
+        searchContainer.appendChild(list);
     }
 
 
@@ -112,20 +189,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (notificationBtn && notificationContainer) {
         notificationBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Stop bubbling to prevent document listener from immediately closing it if that's the issue
+            e.stopPropagation();
 
             if (notificationContainer.classList.contains('hidden')) {
                 notificationContainer.classList.remove('hidden');
-                // Close search if open
-                if (searchContainer && !searchContainer.classList.contains('hidden')) {
-                    searchContainer.classList.add('hidden');
-                }
             } else {
                 notificationContainer.classList.add('hidden');
             }
         });
 
-        // Close when clicking outside (Optional polish)
+        // Close when clicking outside
         document.addEventListener('click', (e) => {
             if (!notificationContainer.classList.contains('hidden') && !notificationContainer.contains(e.target) && !notificationBtn.contains(e.target)) {
                 notificationContainer.classList.add('hidden');
@@ -148,20 +221,15 @@ document.addEventListener('DOMContentLoaded', () => {
         notificationList.innerHTML = '';
 
         if (songs.length === 0) {
-            notificationList.innerHTML = '<p class="text-gray text-center text-sm p-4">No new notifications</p>';
+            notificationList.innerHTML = '<p class="text-gray-400 text-center text-sm p-4">No new notifications</p>';
             return;
         }
 
         songs.forEach(song => {
-            // Clean up title
             const songName = song.video_title.replace('fi4cr - ', '').replace(/ \(from .*?\)/, '');
-            // Get playlist name for art
-            // The song object we pass needs to have the playlistName attached
             const playlistName = song.playlistName ? song.playlistName.replace('fi4cr - ', '') : 'Unknown';
             const artSrc = getArtForPlaylist(playlistName);
 
-
-            // Format date
             const dateObj = new Date(song.video_published_at);
             const dateStr = dateObj.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
             const isYest = isYesterday(dateObj);
@@ -172,9 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${artSrc}" alt="${playlistName}" class="w-12 h-12 rounded-lg object-cover shadow-sm">
                     <div class="flex-1 min-w-0">
                         <p class="text-white text-sm font-bold truncate group-hover:text-primary transition-colors">${songName}</p>
-                        <p class="text-gray text-xs truncate">${playlistName} • ${subText}</p>
+                        <p class="text-gray-400 text-xs truncate">${playlistName} • ${subText}</p>
                     </div>
-                     <span class="material-symbols-outlined text-gray group-hover:text-white text-lg">play_arrow</span>
+                     <span class="material-icons-outlined text-gray-500 group-hover:text-white text-lg">play_arrow</span>
                 </a>
             `;
             notificationList.insertAdjacentHTML('beforeend', html);
@@ -192,20 +260,16 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             const now = new Date();
-
-            // Filter out unpublished videos immediately AND collect all valid videos for notifications
             let allPublishedVideos = [];
 
             data.forEach(playlist => {
                 if (playlist.videos) {
-                    // Filter playlist.videos in place for the main hub view logic
                     playlist.videos = playlist.videos.filter(v => {
-                        if (!v.video_published_at) return true; // Keep if no date (assumed legacy/published)
+                        if (!v.video_published_at) return true;
                         const vDate = new Date(v.video_published_at);
                         const isPublished = vDate <= now;
 
                         if (isPublished) {
-                            // Attach playlist name to video object for easier processing later
                             v.playlistName = playlist.playlist_name;
                             allPublishedVideos.push(v);
                         }
@@ -216,18 +280,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Notification Logic
-            // 1. Check for videos published "Yesterday"
             let notificationSongs = allPublishedVideos.filter(v => {
                 if (!v.video_published_at) return false;
                 return isYesterday(new Date(v.video_published_at));
             });
 
-            // Sort by date descending
             notificationSongs.sort((a, b) => new Date(b.video_published_at) - new Date(a.video_published_at));
 
-            // 2. If none, grab last 6 videos
             if (notificationSongs.length === 0) {
-                // Sort all videos by date descending
                 allPublishedVideos.sort((a, b) => {
                     const dateA = a.video_published_at ? new Date(a.video_published_at) : new Date(0);
                     const dateB = b.video_published_at ? new Date(b.video_published_at) : new Date(0);
@@ -238,22 +298,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             renderNotifications(notificationSongs);
 
-            // ... Rest of existing logic ...
-
             let latestPly = null;
             let maxDate = new Date(0);
 
-            // Helper to get the most recent *published* video date for a playlist
-            // Returns null if no videos are published yet
             function getLatestPublishedVideoDate(playlist) {
                 if (!playlist.videos || playlist.videos.length === 0) return null;
-
                 let latest = null;
 
                 playlist.videos.forEach(v => {
                     if (v.video_published_at) {
                         const vDate = new Date(v.video_published_at);
-                        // Already filtered for <= now above, but double check doesn't hurt
                         if (vDate <= now) {
                             if (!latest || vDate > latest) {
                                 latest = vDate;
@@ -264,10 +318,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 return latest;
             }
 
-            // Save data for search
             allPlaylists = data.filter(p => getLatestPublishedVideoDate(p) !== null);
 
-            // Find Featured Release (Playlist with the most recent video)
+            // Find Featured Release
             data.forEach(p => {
                 const pDate = getLatestPublishedVideoDate(p);
 
@@ -282,20 +335,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (latestPly) {
                 const displayName = latestPly.playlist_name.replace('fi4cr - ', '');
 
-                // Update Title
                 if (featuredTitle) featuredTitle.textContent = displayName;
-
-                // Update Tracks Info
-                if (featuredTracks) featuredTracks.textContent = `Electronic • ${latestPly.videos.length} Tracks`;
-
-                // Update Art
+                if (featuredTracks) featuredTracks.textContent = `Experience the future of jungle. A meticulously curated collection of ${latestPly.videos.length} tracks blending classic rhythms with neural synthesis.`;
                 const artSrc = getArtForPlaylist(displayName);
-                if (featuredBg) featuredBg.style.backgroundImage = `url('${artSrc}')`;
+                if (featuredBg) featuredBg.src = artSrc;
 
-                // Update Link
                 if (featuredCard) featuredCard.setAttribute('onclick', `window.location.href='player.html?playlist=${encodeURIComponent(displayName)}'`);
-
-                console.log(`Updated featured release to: ${displayName}`);
             }
 
             // Initial Render
@@ -318,29 +363,62 @@ document.addEventListener('DOMContentLoaded', () => {
             sorted.forEach(p => {
                 const displayName = p.playlist_name.replace('fi4cr - ', '');
                 const artSrc = getArtForPlaylist(displayName);
-                // Use 'Tracks' count as subtitle since we don't have manual genres
-                const subtitle = p.videos ? `${p.videos.length} Tracks` : 'Collection';
-                // Safely encode for URL
+                const trackCount = p.videos ? p.videos.length : 0;
                 const encodedName = encodeURIComponent(displayName);
 
-                const cardHtml = `
-                    <div onclick="window.location.href='player.html?playlist=${encodedName}'"
-                        class="relative aspect-square rounded-xl overflow-hidden group cursor-pointer">
-                        <div class="absolute inset-0 bg-cover"
-                            style="background-image: url('${artSrc}');"></div>
-                        <div class="absolute inset-0 gradient-overlay-bottom"></div>
-                        <div class="absolute bottom-0 left-0 p-8">
-                            <p class="text-white text-lg font-bold truncate">${displayName}</p>
-                            <p class="text-gray text-sm">${subtitle}</p>
+                // --- HTML Templates ---
+
+                // 1. Core Collection Card (Large, Featured Visuals)
+                const collectionCard = `
+                    <div onclick="window.location.href='player.html?playlist=${encodedName}'" class="group relative aspect-[16/9] md:aspect-[2/1] rounded-2xl overflow-hidden cursor-pointer border border-white/5 hover:border-primary/50 transition-colors duration-500">
+                        <img alt="${displayName}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-100" src="${artSrc}"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0B0710] via-[#0B0710]/20 to-transparent"></div>
+                        <div class="absolute inset-0 bg-purple-900/10 group-hover:bg-purple-900/0 transition-colors"></div>
+                        <div class="absolute bottom-0 left-0 p-8 w-full">
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-primary transition-colors">${displayName}</h3>
+                            <p class="text-gray-400 text-sm font-medium flex items-center">
+                                <span class="material-icons-round text-sm mr-1">graphic_eq</span> ${trackCount} Tracks
+                            </p>
+                        </div>
+                        <div class="absolute bottom-8 right-8 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                            <button class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-primary hover:border-primary text-white flex items-center justify-center shadow-lg">
+                                <span class="material-icons-round text-2xl">play_arrow</span>
+                            </button>
                         </div>
                     </div>
                 `;
 
-                // Categorize based on "Style"
-                if (displayName.toLowerCase().includes('style')) {
-                    stylesHtml += cardHtml;
+                // 2. Style Study Card (Compact, Grid)
+                const styleCard = `
+                    <div onclick="window.location.href='player.html?playlist=${encodedName}'" class="bg-surface-dark hover:bg-surface-hover border border-white/5 hover:border-white/10 p-4 rounded-xl transition-all duration-300 cursor-pointer group hover:-translate-y-1">
+                        <div class="aspect-square rounded-lg overflow-hidden mb-4 relative shadow-lg">
+                            <img alt="${displayName}" class="w-full h-full object-cover" src="${artSrc}"/>
+                            <div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[2px]">
+                                <span class="material-icons-round text-primary text-5xl drop-shadow-2xl scale-75 group-hover:scale-100 transition-transform duration-300">play_circle</span>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-white truncate text-sm mb-1 group-hover:text-primary transition-colors">${displayName}</h4>
+                        <p class="text-xs text-gray-500 truncate">${trackCount} Tracks</p>
+                    </div>
+                `;
+
+                // Categorize
+                if (displayName.toLowerCase().includes('style') || displayName.toLowerCase().includes('collection')) {
+                    // Heuristic: If it says "Style" or "Collection" put it in "Style Studies" / Bottom grid?
+                    // Wait, user asked for "Core Collections" and "Style Studies".
+                    // Let's keep the logic consistent: 
+                    // IF "Style" in name -> Style Studies (Small Cards)
+                    // ELSE -> Core Collections (Large Cards)
+
+                    if (displayName.toLowerCase().includes('style')) {
+                        stylesHtml += styleCard;
+                    } else {
+                        collectionsHtml += collectionCard;
+                    }
+
                 } else {
-                    collectionsHtml += cardHtml;
+                    // Default to Core Collections
+                    collectionsHtml += collectionCard;
                 }
             });
 
