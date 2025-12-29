@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Music Player - Tribal House Collection</title>
+    <!-- Auto-routing for Mobile -->
+    <script>
+        if (window.innerWidth < 768) {
+            const urlParams = new URLSearchParams(window.location.search);
+            window.location.href = 'mobile-player.html?' + urlParams.toString();
+        }
+    </script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined|Material+Icons+Round"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#9D15E5",
+                        "primary-dark": "#7e11b8",
+                        "background-dark": "#0D0712", // Deeper black-purple
+                        "surface-dark": "#1E1226",
+                        "surface-highlight": "#2d1b38",
+                        "text-dark": "#E5E7EB",
+                        "muted-dark": "#9CA3AF",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 25px rgba(157, 21, 229, 0.5)',
+                        'glow-subtle': '0 0 15px rgba(157, 21, 229, 0.2)',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                },
+            },
+        };
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-[#0D0712] font-display text-text-dark antialiased h-screen flex flex-col overflow-hidden selection:bg-primary selection:text-white dark">
+    <div
+        class="fixed inset-0 bg-gradient-to-b from-[#2e1042] via-[#130b1b] to-[#050308] opacity-80 z-0 pointer-events-none">
+    </div>
+    <header
+        class="sticky top-0 z-50 bg-[#0B0710]/80 backdrop-blur-md border-b border-white/5 px-6 py-4 flex items-center justify-between">
+        <div class="flex flex-col">
+            <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                Playlist Hub
+                <span
+                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-primary border border-white/5">PRO</span>
+            </h1>
+            <span class="text-xs font-semibold tracking-wider text-primary/80 uppercase">AI Audio Experience</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <!-- Search Container -->
+            <div class="relative mr-2">
+                <div class="hidden md:flex relative">
+                    <input id="search-input"
+                        class="bg-surface-dark border border-border-subtle rounded-full py-1.5 pl-4 pr-10 text-sm focus:ring-1 focus:ring-primary focus:border-primary placeholder-gray-600 w-64 text-gray-300"
+                        placeholder="Search collection..." type="text" />
+                    <span class="material-icons-outlined absolute right-3 top-1.5 text-gray-500 text-lg">search</span>
+                </div>
+                <!-- Search Results Dropdown -->
+                <div id="search-container"
+                    class="absolute top-full right-0 mt-2 w-80 bg-surface-dark border border-white/10 rounded-xl shadow-2xl hidden z-50">
+                    <!-- Results will be injected here -->
+                </div>
+            </div>
+
+            <!-- Mobile Search Button -->
+            <button id="mobile-search-btn"
+                class="md:hidden p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white">
+                <span class="material-icons-outlined">search</span>
+            </button>
+
+            <!-- Home -->
+            <a href="index.html"
+                class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white" title="Hub">
+                <span class="material-icons-outlined">grid_view</span>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@fi4cre" target="_blank"
+                class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                title="Visuals">
+                <span class="material-icons-outlined">smart_display</span>
+            </a>
+
+            <!-- Artist -->
+            <a href="about.html"
+                class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                title="Artist">
+                <span class="material-icons-outlined">person_outline</span>
+            </a>
+
+            <!-- Notifications -->
+            <div class="relative">
+                <button id="notification-btn"
+                    class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white relative">
+                    <span class="material-icons-outlined">notifications</span>
+                    <span
+                        class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full shadow-[0_0_8px_rgba(217,70,239,0.6)]"></span>
+                </button>
+                <div id="notification-container"
+                    class="absolute top-full right-0 mt-2 z-50 bg-surface-dark rounded-xl hidden border border-white/10 shadow-2xl w-80 max-h-[60vh] overflow-y-auto">
+                    <div id="notification-list" class="p-2 flex flex-col gap-1">
+                        <!-- Notifications will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <button
+                class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 ring-2 ring-white/10 flex items-center justify-center text-white text-xs font-bold shadow-lg hover:ring-primary transition-all">
+                F
+            </button>
+        </div>
+    </header>
+    <main class="flex-1 overflow-y-auto no-scrollbar pb-36 relative z-10">
+        <div class="px-6 flex flex-col items-center mt-2">
+            <details class="w-full max-w-[320px] mb-6 group open:mb-8 transition-all duration-300">
+                <summary class="flex justify-center outline-none cursor-pointer">
+                    <div
+                        class="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#1E1226]/80 border border-white/5 hover:border-primary/40 hover:bg-[#2d1b38] transition-all duration-300 shadow-lg group-open:bg-primary/10 group-open:border-primary/50 backdrop-blur-md">
+                        <span
+                            class="material-icons-round text-primary text-lg group-open:text-primary drop-shadow-[0_0_8px_rgba(157,21,229,0.5)]">videocam</span>
+                        <span
+                            class="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 group-hover:text-white group-open:text-white transition-colors">Video
+                            Mode</span>
+                        <span
+                            class="material-icons-round text-gray-500 text-lg group-open:rotate-180 group-open:text-primary transition-transform duration-300">expand_more</span>
+                    </div>
+                </summary>
+                <div
+                    class="mt-6 w-full aspect-video bg-black rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_40px_-10px_rgba(157,21,229,0.3)] relative z-20">
+                    <!-- Added id="main-player" -->
+                    <iframe id="main-player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen="" class="w-full h-full" frameborder="0"
+                        src="https://www.youtube.com/embed/5dbG4yGSVvE?controls=1&amp;modestbranding=1"
+                        title="YouTube video player"></iframe>
+                </div>
+            </details>
+            <div class="relative w-72 h-72 md:w-80 md:h-80 mb-8 group">
+                <div class="absolute -inset-4 bg-primary/40 rounded-full blur-3xl opacity-60 animate-pulse-slow"></div>
+                <!-- Added id="hero-image" -->
+                <img id="hero-image"
+                    alt="Tribal House Collection Album Art - Abstract geometric wood and leather pattern"
+                    class="relative w-full h-full object-cover rounded-3xl shadow-2xl z-10 border border-white/5"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPB5dge3Rp6g_Oy5gWeyZl9qbQRu2tjbmqNwvMxWwATPWT_r_3DQ_Yh0QRQlA9CUIgfIhQFceXi4PKnLGacUOmvOuvDqToEIw0wS16z8Qf3TBzRPb7DNOt7Nd1zUOWl9Jl4YsSEzkcgEgtxbOomDWAiEy7uzVrPNG8VFfGLZpaj4MrqdNjWrDNKHVU4XRLTrNpVuWlMu0bIqKZoW82qmrXb5DgD_e8KfA1kJImXnX59k5nrX9CXIC0blA9x8_XFoFUy8pojYrhG8jY" />
+            </div>
+            <div class="text-center space-y-1 mb-8 w-full">
+                <!-- Added id="page-title" handled by hub, repurposed here for player title -->
+                <h2 id="current-title" class="text-2xl font-bold text-white tracking-tight leading-snug drop-shadow-sm">
+                    Tribal House
+                    Collection</h2>
+                <p id="current-artist" class="text-primary font-medium text-sm tracking-wide">fi4cr</p>
+                <div
+                    class="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-highlight/50 border border-white/5 backdrop-blur-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_5px_rgba(74,222,128,0.5)]"></span>
+                    <p class="text-[10px] text-gray-300 uppercase tracking-widest font-semibold">AI Generated</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 w-full max-w-xs mb-10">
+                <!-- Added id="play-btn" -->
+                <button id="play-btn"
+                    class="flex-1 h-14 rounded-2xl flex items-center justify-center gap-2 font-semibold bg-primary text-white shadow-glow hover:bg-primary-dark active:scale-95 transition-all group">
+                    <span class="material-icons-round text-2xl">pause</span>
+                    <span>Pause</span>
+                </button>
+                <!-- Added id="shuffle-btn" -->
+                <button id="shuffle-btn"
+                    class="flex-1 h-14 rounded-2xl flex items-center justify-center gap-2 font-medium bg-surface-highlight border border-white/5 text-gray-200 hover:bg-white/10 active:scale-95 transition-all group">
+                    <span
+                        class="material-icons-round rotate-45 text-gray-400 group-hover:text-white transition-colors">shuffle</span>
+                    <span>Shuffle</span>
+                </button>
+            </div>
+        </div>
+        <div class="px-2">
+            <div
+                class="px-4 flex justify-between items-center mb-4 sticky top-0 py-3 bg-[#130b1b]/95 backdrop-blur-xl z-20 border-b border-white/5 rounded-t-2xl">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">Up Next</h3>
+                <button
+                    class="text-xs font-medium text-primary hover:text-white transition-colors flex items-center gap-1 group">
+                    Smart Sort <span
+                        class="material-icons-round text-sm group-hover:translate-y-0.5 transition-transform">sort</span>
+                </button>
+            </div>
+            <!-- Added id="playlist-container" and cleared hardcoded contents -->
+            <div id="playlist-container" class="flex flex-col space-y-1 pb-4">
+                <!-- Playlist Item TEMPLATE (for reference/script generation)
+                <div class="group flex items-center px-4 py-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
+                    <span class="w-8 text-xs font-mono text-gray-600 group-hover:text-gray-400 transition-colors">01</span>
+                    <div class="flex-1 ml-2">
+                        <h4 class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">Pressure</h4>
+                        <p class="text-[10px] text-gray-600">3:42</p>
+                    </div>
+                    <button class="opacity-0 group-hover:opacity-100 p-2 text-gray-400 hover:text-white transition-all"><span class="material-icons-round text-base">add</span></button>
+                </div>
+                -->
+            </div>
+        </div>
+    </main>
+    <div class="fixed bottom-0 left-0 right-0 z-30 bg-[#0D0712]">
+        <div class="h-1 bg-surface-highlight w-full relative group cursor-pointer">
+            <div class="h-full bg-primary w-1/3 relative shadow-[0_0_15px_rgba(157,21,229,0.8)]">
+                <div
+                    class="absolute -right-1.5 -top-1 w-3 h-3 bg-white rounded-full shadow-lg scale-0 group-hover:scale-100 transition-transform duration-200">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Script Inclusion -->
+    <script type="module" src="assets/js/script.js?v=7"></script>
+</body>
+
+</html>
