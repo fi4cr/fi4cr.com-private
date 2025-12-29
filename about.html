@@ -14,6 +14,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined|Material+Icons+Round"
+        rel="stylesheet" />
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -55,25 +57,81 @@
 <body
     class="bg-background-light dark:bg-background-dark min-h-screen font-display text-slate-900 dark:text-white overflow-x-hidden selection:bg-primary selection:text-white flex flex-col">
     <!-- Top Navigation -->
-    <nav
-        class="sticky top-0 z-40 w-full backdrop-blur-md bg-background-light/90 dark:bg-background-dark/90 border-b border-gray-200 dark:border-white/5 transition-colors duration-300">
-        <div class="flex items-center justify-between px-4 py-3">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
-                <!-- Brand Icon -->
-                <div class="size-8 rounded bg-primary/20 flex items-center justify-center text-primary">
-                    <span class="material-symbols-outlined text-[20px]">graphic_eq</span>
+    <!-- Top Navigation -->
+    <header
+        class="sticky top-0 z-50 bg-[#0B0710]/80 backdrop-blur-md border-b border-white/5 px-6 py-4 flex items-center justify-between">
+        <div class="flex flex-col">
+            <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                Playlist Hub
+                <span
+                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-primary border border-white/5">PRO</span>
+            </h1>
+            <span class="text-xs font-semibold tracking-wider text-primary/80 uppercase">AI Audio Experience</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <!-- Search Container -->
+            <div class="relative mr-2">
+                <div class="hidden md:flex relative">
+                    <input id="search-input"
+                        class="bg-surface-dark border border-border-subtle rounded-full py-1.5 pl-4 pr-10 text-sm focus:ring-1 focus:ring-primary focus:border-primary placeholder-gray-600 w-64 text-gray-300"
+                        placeholder="Search collection..." type="text" />
+                    <span class="material-icons-outlined absolute right-3 top-1.5 text-gray-500 text-lg">search</span>
                 </div>
-                <!-- Brand Name -->
-                <h1 class="text-xl font-bold tracking-tight text-primary dark:text-white">fi4cr</h1>
+                <!-- Search Results Dropdown -->
+                <div id="search-container"
+                    class="absolute top-full right-0 mt-2 w-80 bg-surface-dark border border-white/10 rounded-xl shadow-2xl hidden z-50">
+                    <!-- Results will be injected here -->
+                </div>
             </div>
-            <!-- Menu Button -->
+
+            <!-- Mobile Search Button -->
+            <button id="mobile-search-btn"
+                class="md:hidden p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white">
+                <span class="material-icons-outlined">search</span>
+            </button>
+
+            <!-- Home -->
+            <a href="index.html"
+                class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white" title="Hub">
+                <span class="material-icons-outlined">grid_view</span>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@fi4cre" target="_blank"
+                class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                title="Visuals">
+                <span class="material-icons-outlined">smart_display</span>
+            </a>
+
+            <!-- Artist -->
+            <a href="about.html"
+                class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                title="Artist">
+                <span class="material-icons-outlined">person_outline</span>
+            </a>
+
+            <!-- Notifications -->
+            <div class="relative">
+                <button id="notification-btn"
+                    class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white relative">
+                    <span class="material-icons-outlined">notifications</span>
+                    <span
+                        class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full shadow-[0_0_8px_rgba(217,70,239,0.6)]"></span>
+                </button>
+                <div id="notification-container"
+                    class="absolute top-full right-0 mt-2 z-50 bg-surface-dark rounded-xl hidden border border-white/10 shadow-2xl w-80 max-h-[60vh] overflow-y-auto">
+                    <div id="notification-list" class="p-2 flex flex-col gap-1">
+                        <!-- Notifications will be injected here -->
+                    </div>
+                </div>
+            </div>
+
             <button
-                class="size-10 flex items-center justify-center rounded-lg text-slate-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
-                onclick="window.location.href='index.html'">
-                <span class="material-symbols-outlined">home</span>
+                class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 ring-2 ring-white/10 flex items-center justify-center text-white text-xs font-bold shadow-lg hover:ring-primary transition-all">
+                F
             </button>
         </div>
-    </nav>
+    </header>
 
     <!-- Main Content Area -->
     <main class="flex-1 pb-36">
@@ -252,162 +310,7 @@
         </section>
     </main>
 
-    <!-- Sticky Mini Player Widget (Static for now, ensuring footer doesn't hide content) -->
-    <div id="sticky-player"
-        class="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-white/10 p-2 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
-        <!-- Progress Bar -->
-        <div class="absolute top-0 left-0 right-0 h-1 bg-gray-200 dark:bg-white/10">
-            <div class="h-full bg-primary w-1/3 relative group cursor-pointer">
-                <div
-                    class="absolute right-0 top-1/2 -translate-y-1/2 size-3 bg-white rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity">
-                </div>
-            </div>
-        </div>
-        <div class="flex items-center gap-3 p-2 cursor-pointer" onclick="window.location.href='player.html'">
-            <!-- Mini Cover Art -->
-            <div class="size-12 rounded bg-gray-200 dark:bg-gray-800 overflow-hidden shrink-0 relative shadow-sm">
-                <div id="sticky-player-cover" class="absolute inset-0 bg-cover bg-center"
-                    style="background-image: url('assets/images/covers/cover_swing_dnb.png');"></div>
-            </div>
-            <!-- Info -->
-            <div class="flex-1 min-w-0 flex flex-col justify-center">
-                <h4 id="sticky-player-title" class="font-bold text-sm text-slate-900 dark:text-white truncate">Latest
-                    Release</h4>
-                <p id="sticky-player-subtitle"
-                    class="text-xs font-medium text-primary truncate flex items-center gap-1">
-                    fi4cr
-                    <span class="size-1 rounded-full bg-primary inline-block"></span>
-                    Now Playing
-                </p>
-            </div>
-            <!-- Controls -->
-            <div class="flex items-center gap-1">
-                <button class="p-2 text-gray-400 hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined text-[28px]">skip_previous</span>
-                </button>
-                <button
-                    class="size-10 flex items-center justify-center text-white bg-primary rounded-full hover:bg-primary/90 transition-transform active:scale-95 shadow-md shadow-primary/20">
-                    <span class="material-symbols-outlined text-[24px] fill-1">play_arrow</span>
-                </button>
-                <button class="p-2 text-gray-400 hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined text-[28px]">skip_next</span>
-                </button>
-            </div>
-        </div>
-        <!-- Safe area spacer -->
-        <div class="h-5 w-full"></div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Re-using art mapping logic briefly or just rely on data if we had it.
-            // Since we can't easily import the map without module issues, let's just fetch and use a simple map duplicate or generic logic.
-            // Actually, best to just fetch playlists and find the latest one.
 
-            // Minimal Art Map for key genres if needed, or just rely on the map in script.js if we could import it. 
-            // For now, I'll essentially replicate the key "getArtForPlaylist" simple logic or just basic mapping.
-            const CACHE_VERSION = '2';
-            const playlistArt = {
-                "Swing D&B": "assets/images/covers/cover_swing_dnb.png",
-                "Electro Swing Alchemy": "assets/images/covers/cover_electro_swing_alchemy.png",
-                // ... (Add others if strictly needed for the 'Latest' one, but usually defaults are fine or we can rely on standard naming if possible)
-                // To be safe, let's just assume the latest is likely one of the main ones or fallback to default.
-                "default": "assets/images/covers/cover_default.png"
-            };
-
-            // Better: Duplicated full map isn't ideal but reliable for this single page without modules.
-            // I'll use a simplified check or fetch the full map if I put it in a separate JSON/JS file.
-            // For now, I'll trust the user wants the *latest* which is likely dynamic.
-            // I will use `hub.js`'s list logic:
-
-            const playlistArtMap = {
-                "Swing D&B": "assets/images/covers/cover_swing_dnb.png",
-                "Ragga D&B": "assets/images/covers/cover_ragga_dnb.png",
-                "Baroque Minimal Techno": "assets/images/covers/cover_baroque_minimal_techno.png",
-                "Folk House": "assets/images/covers/cover_folk_house.png",
-                "Tribal House": "assets/images/covers/cover_tribal_house.png",
-                "Orchestral Dubstep": "assets/images/covers/cover_orch_dubstep.png",
-                // ... Add more as needed or use a robust finder if we had the full list
-                "default": "assets/images/covers/cover_default.png"
-            };
-
-            function getArt(name) {
-                // Try exact match first
-                for (const [key, value] of Object.entries(playlistArtMap)) {
-                    if (name.includes(key)) return value;
-                }
-                // If not found, try to guess from name (e.g. "cover_[name_lower].png")? No, too risky.
-                // Fallback to default
-                return playlistArtMap["default"];
-            }
-
-            // We can also just try to load the known 'hub.js' art logic if we included it, but `about.html` didn't include it. 
-            // I will implement the fetch logic.
-
-            fetch(`assets/data/playlists.json?v=${new Date().getTime()}`)
-                .then(res => res.json())
-                .then(data => {
-                    const now = new Date();
-                    let latestPly = null;
-                    let maxDate = new Date(0);
-
-                    data.forEach(p => {
-                        if (p.playlist_published_at) {
-                            const pDate = new Date(p.playlist_published_at);
-                            if (pDate <= now && pDate > maxDate) {
-                                maxDate = pDate;
-                                latestPly = p;
-                            }
-                        }
-                    });
-
-                    if (latestPly) {
-                        const displayName = latestPly.playlist_name.replace('fi4cr - ', '');
-
-                        // Update UI
-                        const titleEl = document.getElementById('sticky-player-title');
-                        const coverEl = document.getElementById('sticky-player-cover');
-                        const containerEl = document.querySelector('#sticky-player > div.flex'); // The clickable area
-
-                        if (titleEl) titleEl.textContent = displayName;
-
-                        // Update onclick
-                        if (containerEl) {
-                            containerEl.setAttribute('onclick', `window.location.href='player.html?playlist=${encodeURIComponent(displayName)}'`);
-                        }
-
-                        // Update Art - We need the full mapping to be accurate. 
-                        // Since I cannot easily copy 100 lines of map here, I will try to use the `cover_[snake_case_name].png` pattern or just use a placeholder if not found.
-                        // Actually, I should probably just include the map. I'll include a subset or the user can accept a generic one if missing.
-                        // Wait, I can just use the provided full map from step 66/67 if I paste it.
-                        // For conciseness, I'll implement a `getArtForPlaylist` that tries to match known keys.
-
-                        // Re-defining the map from hub.js (abbreviated for critical ones, assuming latest is one of them)
-                        // Actually, I'll copy the map from the artifact or previous turn.
-                        // Since I have it in the context (Step 66), I'll use a reasonably comprehensive list.
-
-                        const art = getArt(displayName); // Use simplified map above for now
-                        // Ideally we'd move the map to a shared .js file (e.g. config.js) but I can't refactor that much right now.
-                        // I will try to infer the image name or use default.
-
-                        // BUT: `hub.js` and `script.js` have the map. 
-                        // Check this: I saw `assets/images/covers/` in step 15. The names are somewhat predictable.
-                        // E.g. "Swing D&B" -> `cover_swing_dnb.png`.
-                        // "Electro Swing Alchemy" -> `cover_electro_swing_alchemy.png`.
-                        // I can try to construct it: `cover_` + name.toLowerCase().replace(/ /g, '_') + `.png`.
-
-                        const simpleName = displayName.toLowerCase().replace(/ /g, '_').replace(/[^a-z0-9_]/g, '');
-                        const potentialPath = `assets/images/covers/cover_${simpleName}.png`;
-
-                        // I'll set it. If it fails (404), maybe fallback (img onerror)? 
-                        // But for background-image, onerror is hard.
-                        // I'll stick to a map for the most likely latest ones + default.
-
-                        if (coverEl) coverEl.style.backgroundImage = `url('assets/images/covers/cover_${simpleName}.png'), url('assets/images/covers/cover_default.png')`;
-                    }
-                })
-                .catch(e => console.error(e));
-        });
-    </script>
 </body>
 
 </html>

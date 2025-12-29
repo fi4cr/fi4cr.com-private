@@ -16,7 +16,8 @@
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
         rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined|Material+Icons+Round"
+        rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         tailwind.config = {
@@ -85,21 +86,79 @@
     <div
         class="fixed inset-0 bg-gradient-to-b from-[#2e1042] via-[#130b1b] to-[#050308] opacity-80 z-0 pointer-events-none">
     </div>
-    <header class="flex-none px-6 pt-14 pb-4 flex justify-between items-center z-10 relative">
-        <button onclick="window.location.href='index.html'"
-            class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors backdrop-blur-sm">
-            <span class="material-icons-round text-white/80 text-xl">expand_more</span>
-        </button>
-        <div class="flex flex-col items-center">
-            <h1 class="text-[10px] font-bold tracking-[0.2em] uppercase text-primary/90 mb-0.5">Now Playing</h1>
-            <!-- Added id="header-title" (mapped to subtitle/from playlist for now, keeping generic text or updating via script) -->
-            <p id="header-title" class="text-[10px] font-medium text-white/40 tracking-wider uppercase">From Playlist
-            </p>
+    <header
+        class="sticky top-0 z-50 bg-[#0B0710]/80 backdrop-blur-md border-b border-white/5 px-6 py-4 flex items-center justify-between">
+        <div class="flex flex-col">
+            <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                Playlist Hub
+                <span
+                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-primary border border-white/5">PRO</span>
+            </h1>
+            <span class="text-xs font-semibold tracking-wider text-primary/80 uppercase">AI Audio Experience</span>
         </div>
-        <button
-            class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors backdrop-blur-sm">
-            <span class="material-icons-round text-white/80 text-xl">more_horiz</span>
-        </button>
+        <div class="flex items-center space-x-4">
+            <!-- Search Container -->
+            <div class="relative mr-2">
+                <div class="hidden md:flex relative">
+                    <input id="search-input"
+                        class="bg-surface-dark border border-border-subtle rounded-full py-1.5 pl-4 pr-10 text-sm focus:ring-1 focus:ring-primary focus:border-primary placeholder-gray-600 w-64 text-gray-300"
+                        placeholder="Search collection..." type="text" />
+                    <span class="material-icons-outlined absolute right-3 top-1.5 text-gray-500 text-lg">search</span>
+                </div>
+                <!-- Search Results Dropdown -->
+                <div id="search-container"
+                    class="absolute top-full right-0 mt-2 w-80 bg-surface-dark border border-white/10 rounded-xl shadow-2xl hidden z-50">
+                    <!-- Results will be injected here -->
+                </div>
+            </div>
+
+            <!-- Mobile Search Button -->
+            <button id="mobile-search-btn"
+                class="md:hidden p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white">
+                <span class="material-icons-outlined">search</span>
+            </button>
+
+            <!-- Home -->
+            <a href="index.html"
+                class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white" title="Hub">
+                <span class="material-icons-outlined">grid_view</span>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@fi4cre" target="_blank"
+                class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                title="Visuals">
+                <span class="material-icons-outlined">smart_display</span>
+            </a>
+
+            <!-- Artist -->
+            <a href="about.html"
+                class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                title="Artist">
+                <span class="material-icons-outlined">person_outline</span>
+            </a>
+
+            <!-- Notifications -->
+            <div class="relative">
+                <button id="notification-btn"
+                    class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white relative">
+                    <span class="material-icons-outlined">notifications</span>
+                    <span
+                        class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full shadow-[0_0_8px_rgba(217,70,239,0.6)]"></span>
+                </button>
+                <div id="notification-container"
+                    class="absolute top-full right-0 mt-2 z-50 bg-surface-dark rounded-xl hidden border border-white/10 shadow-2xl w-80 max-h-[60vh] overflow-y-auto">
+                    <div id="notification-list" class="p-2 flex flex-col gap-1">
+                        <!-- Notifications will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <button
+                class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 ring-2 ring-white/10 flex items-center justify-center text-white text-xs font-bold shadow-lg hover:ring-primary transition-all">
+                F
+            </button>
+        </div>
     </header>
     <main class="flex-1 overflow-y-auto no-scrollbar pb-36 relative z-10">
         <div class="px-6 flex flex-col items-center mt-2">
@@ -195,40 +254,7 @@
                 </div>
             </div>
         </div>
-        <nav class="bg-[#130b1b]/95 border-t border-white/5 px-6 pt-2 pb-8 backdrop-blur-md">
-            <div class="flex justify-between items-end">
-                <button onclick="window.location.href='index.html'"
-                    class="flex flex-col items-center gap-1.5 p-2 min-w-[64px] group opacity-60 hover:opacity-100 transition-all">
-                    <span
-                        class="material-icons-round text-2xl text-white group-hover:text-primary transition-colors">grid_view</span>
-                    <span
-                        class="text-[9px] font-semibold text-white uppercase tracking-wider group-hover:text-primary transition-colors">Hub</span>
-                </button>
-                <button onclick="window.location.href='about.html'"
-                    class="flex flex-col items-center gap-1.5 p-2 min-w-[64px] group opacity-60 hover:opacity-100 transition-all">
-                    <span
-                        class="material-icons-round text-2xl text-white group-hover:text-primary transition-colors">person</span>
-                    <span
-                        class="text-[9px] font-semibold text-white uppercase tracking-wider group-hover:text-primary transition-colors">Artist</span>
-                </button>
-                <button onclick="window.open('https://www.youtube.com/@fi4cre', '_blank')"
-                    class="flex flex-col items-center gap-1.5 p-2 min-w-[64px] group opacity-60 hover:opacity-100 transition-all">
-                    <span
-                        class="material-icons-round text-2xl text-white group-hover:text-primary transition-colors">smart_display</span>
-                    <span
-                        class="text-[9px] font-semibold text-white uppercase tracking-wider group-hover:text-primary transition-colors">Video</span>
-                </button>
-                <button class="flex flex-col items-center gap-1.5 p-2 min-w-[64px] group">
-                    <div class="relative">
-                        <span
-                            class="material-icons-round text-2xl text-primary drop-shadow-[0_0_8px_rgba(157,21,229,0.6)]">play_circle</span>
-                        <span class="absolute inset-0 bg-primary rounded-full blur-md opacity-20 animate-pulse"></span>
-                    </div>
-                    <span
-                        class="text-[9px] font-bold text-primary uppercase tracking-wider shadow-black drop-shadow-sm">Player</span>
-                </button>
-            </div>
-        </nav>
+
     </div>
     <!-- Script Inclusion -->
     <script type="module" src="assets/js/script.js?v=7"></script>

@@ -19,6 +19,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined|Material+Icons+Round"
+        rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -124,19 +126,61 @@
         <div
             class="absolute bottom-[-10%] right-[-10%] w-[100%] h-[50%] bg-primary/10 blur-[80px] rounded-full pointer-events-none z-0">
         </div>
-        <div class="relative z-10 flex items-center justify-between p-6 pt-8">
-            <button onclick="window.location.href='index.html'"
-                class="flex size-10 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white transition-colors">
-                <span class="material-symbols-outlined" style="font-size: 32px;">keyboard_arrow_down</span>
-            </button>
-            <div class="flex flex-col items-center">
-                <span class="text-xs font-semibold tracking-widest text-white/50 uppercase">Now Playing</span>
+        <header
+            class="sticky top-0 z-50 bg-[#0B0710]/80 backdrop-blur-md border-b border-white/5 px-4 py-3 flex items-center justify-between w-full">
+            <div class="flex flex-col">
+                <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+                    Playlist Hub
+                    <span
+                        class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-white/10 text-primary border border-white/5">PRO</span>
+                </h1>
+                <span class="text-[10px] font-semibold tracking-wider text-primary/80 uppercase">AI Audio
+                    Experience</span>
             </div>
-            <button
-                class="flex size-10 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white transition-colors">
-                <span class="material-symbols-outlined">more_horiz</span>
-            </button>
-        </div>
+            <div class="flex items-center space-x-2">
+                <!-- Mobile Search Button -->
+                <button id="mobile-search-btn"
+                    class="p-1.5 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white">
+                    <span class="material-icons-outlined text-lg">search</span>
+                </button>
+
+                <!-- Home -->
+                <a href="index.html"
+                    class="p-1.5 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                    title="Hub">
+                    <span class="material-icons-outlined text-lg">grid_view</span>
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@fi4cre" target="_blank"
+                    class="p-1.5 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                    title="Visuals">
+                    <span class="material-icons-outlined text-lg">smart_display</span>
+                </a>
+
+                <!-- Artist -->
+                <a href="about.html"
+                    class="p-1.5 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                    title="Artist">
+                    <span class="material-icons-outlined text-lg">person_outline</span>
+                </a>
+
+                <!-- Notifications -->
+                <div class="relative">
+                    <button id="notification-btn"
+                        class="p-1.5 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white relative">
+                        <span class="material-icons-outlined text-lg">notifications</span>
+                        <span
+                            class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_rgba(217,70,239,0.6)]"></span>
+                    </button>
+                </div>
+
+                <button
+                    class="w-7 h-7 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 ring-1 ring-white/10 flex items-center justify-center text-white text-[10px] font-bold shadow-lg hover:ring-primary transition-all">
+                    F
+                </button>
+            </div>
+        </header>
         <div class="relative z-10 flex flex-1 flex-col items-center justify-start px-6 pt-2 pb-8 gap-8">
             <div
                 class="flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-lg">
