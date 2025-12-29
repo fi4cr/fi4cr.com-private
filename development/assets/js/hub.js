@@ -182,72 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- Notification Implementation ---
-    const notificationBtn = document.getElementById('notification-btn');
-    const notificationContainer = document.getElementById('notification-container');
-    const notificationList = document.getElementById('notification-list');
 
-    if (notificationBtn && notificationContainer) {
-        notificationBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
 
-            if (notificationContainer.classList.contains('hidden')) {
-                notificationContainer.classList.remove('hidden');
-            } else {
-                notificationContainer.classList.add('hidden');
-            }
-        });
 
-        // Close when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!notificationContainer.classList.contains('hidden') && !notificationContainer.contains(e.target) && !notificationBtn.contains(e.target)) {
-                notificationContainer.classList.add('hidden');
-            }
-        });
-    }
-
-    function isYesterday(date) {
-        const now = new Date();
-        const yesterday = new Date(now);
-        yesterday.setDate(now.getDate() - 1);
-
-        return date.getDate() === yesterday.getDate() &&
-            date.getMonth() === yesterday.getMonth() &&
-            date.getFullYear() === yesterday.getFullYear();
-    }
-
-    function renderNotifications(songs) {
-        if (!notificationList) return;
-        notificationList.innerHTML = '';
-
-        if (songs.length === 0) {
-            notificationList.innerHTML = '<p class="text-gray-400 text-center text-sm p-4">No new notifications</p>';
-            return;
-        }
-
-        songs.forEach(song => {
-            const songName = song.video_title.replace('fi4cr - ', '').replace(/ \(from .*?\)/, '');
-            const playlistName = song.playlistName ? song.playlistName.replace('fi4cr - ', '') : 'Unknown';
-            const artSrc = getArtForPlaylist(playlistName);
-
-            const dateObj = new Date(song.video_published_at);
-            const dateStr = dateObj.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-            const isYest = isYesterday(dateObj);
-            const subText = isYest ? 'Yesterday' : dateStr;
-
-            const html = `
-                <a href="${song.video_url}" target="_blank" class="flex items-center gap-3 p-2 hover:bg-white/5 rounded-xl transition-colors group">
-                    <img src="${artSrc}" alt="${playlistName}" class="w-12 h-12 rounded-lg object-cover shadow-sm">
-                    <div class="flex-1 min-w-0">
-                        <p class="text-white text-sm font-bold truncate group-hover:text-primary transition-colors">${songName}</p>
-                        <p class="text-gray-400 text-xs truncate">${playlistName} • ${subText}</p>
-                    </div>
-                     <span class="material-icons-outlined text-gray-500 group-hover:text-white text-lg">play_arrow</span>
-                </a>
-            `;
-            notificationList.insertAdjacentHTML('beforeend', html);
-        });
-    }
 
 
     const featuredTitle = document.getElementById('featured-title');
@@ -279,24 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Notification Logic
-            let notificationSongs = allPublishedVideos.filter(v => {
-                if (!v.video_published_at) return false;
-                return isYesterday(new Date(v.video_published_at));
-            });
 
-            notificationSongs.sort((a, b) => new Date(b.video_published_at) - new Date(a.video_published_at));
-
-            if (notificationSongs.length === 0) {
-                allPublishedVideos.sort((a, b) => {
-                    const dateA = a.video_published_at ? new Date(a.video_published_at) : new Date(0);
-                    const dateB = b.video_published_at ? new Date(b.video_published_at) : new Date(0);
-                    return dateB - dateA;
-                });
-                notificationSongs = allPublishedVideos.slice(0, 6);
-            }
-
-            renderNotifications(notificationSongs);
 
             let latestPly = null;
             let maxDate = new Date(0);
