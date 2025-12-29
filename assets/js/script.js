@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isPlaying = false;
 
     // Map Playlist Names to Image Files
-    const CACHE_VERSION = '2';
+    const CACHE_VERSION = '3';
     const playlistArt = {
         "Swing D&B": "assets/images/covers/cover_swing_dnb.png",
         "Ragga D&B": "assets/images/covers/cover_ragga_dnb.png",
@@ -144,8 +144,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Hero Button
         if (heroPlayBtn) {
-            heroPlayBtn.querySelector('.material-symbols-outlined').textContent = iconName;
-            heroPlayBtn.querySelector('span:not(.material-symbols-outlined)').textContent = text;
+            const icon = heroPlayBtn.querySelector('.material-symbols-outlined, .material-icons-round');
+            if (icon) icon.textContent = iconName;
+
+            // Text span (assume it's the second child or use :not selector with both classes)
+            const textSpan = heroPlayBtn.querySelector('span:not(.material-symbols-outlined):not(.material-icons-round)');
+            if (textSpan) textSpan.textContent = text;
         }
 
         // Mini Player Button
@@ -190,15 +194,56 @@ document.addEventListener('DOMContentLoaded', () => {
         player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1`;
 
         const cleanTitle = video.video_title.replace(/fi4cr - | \(from .*\)/g, '');
-        currentTitle.textContent = cleanTitle;
-        currentArtist.textContent = "fi4cr";
+        if (currentTitle) currentTitle.textContent = cleanTitle;
+        if (currentArtist) currentArtist.textContent = "fi4cr";
 
         // Update Active Class
         document.querySelectorAll('.playlist-item').forEach(item => {
-            item.classList.remove('active');
+            // Reset to default state
+            item.className = 'group flex items-center px-4 py-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer playlist-item';
+            item.innerHTML = item.innerHTML.replace(/text-primary/g, 'text-gray-600').replace(/text-white/g, 'text-gray-300');
+
+            // Remove active-specific elements if any (simplified reset)
+            const idx = item.querySelector('.item-index');
+            if (idx) idx.className = 'w-8 text-xs font-mono text-gray-600 group-hover:text-gray-400 transition-colors item-index';
+
+            // Hide "Playing" text
+            const p = item.querySelector('p');
+            if (p) p.classList.add('hidden');
         });
+
         const activeItem = document.getElementById(`video-${index}`);
-        if (activeItem) activeItem.classList.add('active');
+        if (activeItem) {
+            // Apply Active State Styles
+            activeItem.className = 'relative flex items-center px-4 py-3 bg-gradient-to-r from-primary/20 via-primary/5 to-transparent rounded-xl border border-primary/20 cursor-default shadow-glow-subtle my-1 playlist-item active';
+
+            const idx = activeItem.querySelector('.item-index');
+            if (idx) idx.className = 'w-8 text-xs font-mono text-primary font-bold ml-1 item-index';
+
+            const title = activeItem.querySelector('.item-title');
+            if (title) {
+                title.className = 'text-sm font-bold text-white item-title';
+            }
+
+            // Show "Playing" text
+            const p = activeItem.querySelector('p');
+            if (p) {
+                p.classList.remove('hidden');
+                p.className = 'text-[10px] text-primary/80 font-medium';
+            }
+
+            // Add the left accent bar and equalizer icon if not present
+            if (!activeItem.querySelector('.active-accent')) {
+                const accent = document.createElement('div');
+                accent.className = 'active-accent absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-r-full';
+                activeItem.prepend(accent);
+
+                const eq = document.createElement('div');
+                eq.className = 'mr-1 active-eq';
+                eq.innerHTML = '<span class="material-icons-round text-primary text-base animate-pulse">graphic_eq</span>';
+                activeItem.appendChild(eq);
+            }
+        }
     }
 
     function renderPlaylist(playlist) {
@@ -207,9 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update Header Info
         const displayName = playlist.playlist_name.replace('fi4cr - ', '');
-        pageTitle.textContent = displayName;
-        headerTitle.textContent = displayName;
-        trackCount.textContent = `${playlist.videos.length} Songs`;
+        if (pageTitle) pageTitle.textContent = displayName;
+        if (headerTitle) headerTitle.textContent = displayName;
+        if (trackCount) trackCount.textContent = `${playlist.videos.length} Songs`;
 
         // Update Artwork
         const artSrc = getArtForPlaylist(displayName);
@@ -217,29 +262,35 @@ document.addEventListener('DOMContentLoaded', () => {
         if (miniPlayerImg) miniPlayerImg.src = artSrc;
 
         // Clear existing items
-        playlistContainer.innerHTML = '';
+        if (playlistContainer) {
+            playlistContainer.innerHTML = '';
 
-        // Render Tracks
-        playlist.videos.forEach((video, index) => {
-            const item = document.createElement('div');
-            item.className = 'playlist-item';
-            item.id = `video-${index}`;
+            // Render Tracks
+            playlist.videos.forEach((video, index) => {
+                const item = document.createElement('div');
+                // Base classes for a list item
+                item.className = 'group flex items-center px-4 py-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer playlist-item';
+                item.id = `video-${index}`;
 
-            const cleanTitle = video.video_title.replace(/fi4cr - | \(from .*\)/g, '');
+                const cleanTitle = video.video_title.replace(/fi4cr - | \(from .*\)/g, '');
+                // Placeholder duration since we don't have it in JSON yet
+                const duration = "3:45";
 
-            item.innerHTML = `
-                <div class="item-index">${(index + 1).toString().padStart(2, '0')}</div>
-                <div class="item-info">
-                    <div class="item-title">${cleanTitle}</div>
-                </div>
-            `;
+                item.innerHTML = `
+                    <span class="w-8 text-xs font-mono text-gray-600 group-hover:text-gray-400 transition-colors item-index">${(index + 1).toString().padStart(2, '0')}</span>
+                    <div class="flex-1 ml-2">
+                        <h4 class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors item-title">${cleanTitle}</h4>
+                        <p class="text-[10px] text-gray-600 hidden">Playing • ${duration}</p>
+                    </div>
+                `;
 
-            item.addEventListener('click', () => {
-                loadVideo(video, index);
+                item.addEventListener('click', () => {
+                    loadVideo(video, index);
+                });
+
+                playlistContainer.appendChild(item);
             });
-
-            playlistContainer.appendChild(item);
-        });
+        }
 
         // Initialize with RANDOM video
         if (playlist.videos.length > 0) {

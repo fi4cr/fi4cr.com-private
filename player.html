@@ -2,154 +2,236 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swing D&B Collection</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=2">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Music Player - Tribal House Collection</title>
+    <!-- Auto-routing for Mobile -->
+    <script>
+        if (window.innerWidth < 768) {
+            const urlParams = new URLSearchParams(window.location.search);
+            window.location.href = 'mobile-player.html?' + urlParams.toString();
+        }
+    </script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#9D15E5",
+                        "primary-dark": "#7e11b8",
+                        "background-dark": "#0D0712", // Deeper black-purple
+                        "surface-dark": "#1E1226",
+                        "surface-highlight": "#2d1b38",
+                        "text-dark": "#E5E7EB",
+                        "muted-dark": "#9CA3AF",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 25px rgba(157, 21, 229, 0.5)',
+                        'glow-subtle': '0 0 15px rgba(157, 21, 229, 0.2)',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                },
+            },
+        };
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
 </head>
 
-<body>
-    <div class="background-glow"></div>
-    <div class="scanlines"></div>
-
-
-    <!-- Fixed Header -->
-    <header class="fixed-header glass-panel">
-        <div class="header-content flex items-center justify-between w-full">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
-                <!-- Brand Icon -->
-                <div class="size-8 rounded bg-primary/20 flex items-center justify-center text-primary"
-                    style="width: 32px; height: 32px; background: rgba(164, 19, 236, 0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #a413ec;">
-                    <span class="material-symbols-outlined" style="font-size: 20px;">graphic_eq</span>
-                </div>
-                <h1 id="header-title" class="header-title"
-                    style="margin: 0; font-size: 1.25rem; font-weight: 700; background: transparent; -webkit-background-clip: unset; -webkit-text-fill-color: inherit; color: inherit;">
-                    fi4cr</h1>
-            </div>
-
-            <button onclick="window.location.href='index.html'" class="icon-btn"
-                style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: none; background: transparent; color: inherit; cursor: pointer;">
-                <span class="material-symbols-outlined">home</span>
-            </button>
+<body
+    class="bg-[#0D0712] font-display text-text-dark antialiased h-screen flex flex-col overflow-hidden selection:bg-primary selection:text-white dark">
+    <div
+        class="fixed inset-0 bg-gradient-to-b from-[#2e1042] via-[#130b1b] to-[#050308] opacity-80 z-0 pointer-events-none">
+    </div>
+    <header class="flex-none px-6 pt-14 pb-4 flex justify-between items-center z-10 relative">
+        <button onclick="window.location.href='index.html'"
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors backdrop-blur-sm">
+            <span class="material-icons-round text-white/80 text-xl">expand_more</span>
+        </button>
+        <div class="flex flex-col items-center">
+            <h1 class="text-[10px] font-bold tracking-[0.2em] uppercase text-primary/90 mb-0.5">Now Playing</h1>
+            <!-- Added id="header-title" (mapped to subtitle/from playlist for now, keeping generic text or updating via script) -->
+            <p id="header-title" class="text-[10px] font-medium text-white/40 tracking-wider uppercase">From Playlist
+            </p>
         </div>
+        <button
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors backdrop-blur-sm">
+            <span class="material-icons-round text-white/80 text-xl">more_horiz</span>
+        </button>
     </header>
-
-    <!-- Scrollable Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <div class="hero-section">
-            <div class="hero-artwork">
-                <img id="hero-image" src="assets/images/covers/cover_swing_dnb.png" alt="Swing D&B Cover Art"
-                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
-                <div class="artwork-glow"></div>
+    <main class="flex-1 overflow-y-auto no-scrollbar pb-36 relative z-10">
+        <div class="px-6 flex flex-col items-center mt-2">
+            <details class="w-full max-w-[320px] mb-6 group open:mb-8 transition-all duration-300">
+                <summary class="flex justify-center outline-none cursor-pointer">
+                    <div
+                        class="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#1E1226]/80 border border-white/5 hover:border-primary/40 hover:bg-[#2d1b38] transition-all duration-300 shadow-lg group-open:bg-primary/10 group-open:border-primary/50 backdrop-blur-md">
+                        <span
+                            class="material-icons-round text-primary text-lg group-open:text-primary drop-shadow-[0_0_8px_rgba(157,21,229,0.5)]">videocam</span>
+                        <span
+                            class="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 group-hover:text-white group-open:text-white transition-colors">Video
+                            Mode</span>
+                        <span
+                            class="material-icons-round text-gray-500 text-lg group-open:rotate-180 group-open:text-primary transition-transform duration-300">expand_more</span>
+                    </div>
+                </summary>
+                <div
+                    class="mt-6 w-full aspect-video bg-black rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_40px_-10px_rgba(157,21,229,0.3)] relative z-20">
+                    <!-- Added id="main-player" -->
+                    <iframe id="main-player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen="" class="w-full h-full" frameborder="0"
+                        src="https://www.youtube.com/embed/5dbG4yGSVvE?controls=1&amp;modestbranding=1"
+                        title="YouTube video player"></iframe>
+                </div>
+            </details>
+            <div class="relative w-72 h-72 md:w-80 md:h-80 mb-8 group">
+                <div class="absolute -inset-4 bg-primary/40 rounded-full blur-3xl opacity-60 animate-pulse-slow"></div>
+                <!-- Added id="hero-image" -->
+                <img id="hero-image"
+                    alt="Tribal House Collection Album Art - Abstract geometric wood and leather pattern"
+                    class="relative w-full h-full object-cover rounded-3xl shadow-2xl z-10 border border-white/5"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPB5dge3Rp6g_Oy5gWeyZl9qbQRu2tjbmqNwvMxWwATPWT_r_3DQ_Yh0QRQlA9CUIgfIhQFceXi4PKnLGacUOmvOuvDqToEIw0wS16z8Qf3TBzRPb7DNOt7Nd1zUOWl9Jl4YsSEzkcgEgtxbOomDWAiEy7uzVrPNG8VFfGLZpaj4MrqdNjWrDNKHVU4XRLTrNpVuWlMu0bIqKZoW82qmrXb5DgD_e8KfA1kJImXnX59k5nrX9CXIC0blA9x8_XFoFUy8pojYrhG8jY" />
             </div>
-            <div class="hero-details">
-                <h2 id="page-title">Swing D&B Collection</h2>
-                <p class="subtitle">Curated by fi4cr</p>
-                <div class="hero-stats">
-                    <span id="track-count">Loading tracks...</span>
+            <div class="text-center space-y-1 mb-8 w-full">
+                <!-- Added id="page-title" handled by hub, repurposed here for player title -->
+                <h2 id="current-title" class="text-2xl font-bold text-white tracking-tight leading-snug drop-shadow-sm">
+                    Tribal House
+                    Collection</h2>
+                <p id="current-artist" class="text-primary font-medium text-sm tracking-wide">fi4cr</p>
+                <div
+                    class="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-highlight/50 border border-white/5 backdrop-blur-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_5px_rgba(74,222,128,0.5)]"></span>
+                    <p class="text-[10px] text-gray-300 uppercase tracking-widest font-semibold">AI Generated</p>
                 </div>
             </div>
-            <div class="hero-actions">
-                <button id="play-btn" class="action-btn primary">
-                    <span class="material-symbols-outlined fill-current">play_arrow</span>
-                    <span>Play</span>
+            <div class="flex items-center gap-4 w-full max-w-xs mb-10">
+                <!-- Added id="play-btn" -->
+                <button id="play-btn"
+                    class="flex-1 h-14 rounded-2xl flex items-center justify-center gap-2 font-semibold bg-primary text-white shadow-glow hover:bg-primary-dark active:scale-95 transition-all group">
+                    <span class="material-icons-round text-2xl">pause</span>
+                    <span>Pause</span>
                 </button>
-                <button id="shuffle-btn" class="action-btn secondary">
-                    <span class="material-symbols-outlined">shuffle</span>
+                <!-- Added id="shuffle-btn" -->
+                <button id="shuffle-btn"
+                    class="flex-1 h-14 rounded-2xl flex items-center justify-center gap-2 font-medium bg-surface-highlight border border-white/5 text-gray-200 hover:bg-white/10 active:scale-95 transition-all group">
+                    <span
+                        class="material-icons-round rotate-45 text-gray-400 group-hover:text-white transition-colors">shuffle</span>
                     <span>Shuffle</span>
                 </button>
             </div>
         </div>
-
-        <!-- Track List -->
-        <div class="track-list-header">
-            <h3>Tracks</h3>
-            <button class="sort-btn">Sort by</button>
-        </div>
-
-        <div id="playlist-container" class="playlist-items pb-32">
-            <!-- Playlist items will be injected here -->
+        <div class="px-2">
+            <div
+                class="px-4 flex justify-between items-center mb-4 sticky top-0 py-3 bg-[#130b1b]/95 backdrop-blur-xl z-20 border-b border-white/5 rounded-t-2xl">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">Up Next</h3>
+                <button
+                    class="text-xs font-medium text-primary hover:text-white transition-colors flex items-center gap-1 group">
+                    Smart Sort <span
+                        class="material-icons-round text-sm group-hover:translate-y-0.5 transition-transform">sort</span>
+                </button>
+            </div>
+            <!-- Added id="playlist-container" and cleared hardcoded contents -->
+            <div id="playlist-container" class="flex flex-col space-y-1 pb-4">
+                <!-- Playlist Item TEMPLATE (for reference/script generation)
+                <div class="group flex items-center px-4 py-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
+                    <span class="w-8 text-xs font-mono text-gray-600 group-hover:text-gray-400 transition-colors">01</span>
+                    <div class="flex-1 ml-2">
+                        <h4 class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">Pressure</h4>
+                        <p class="text-[10px] text-gray-600">3:42</p>
+                    </div>
+                    <button class="opacity-0 group-hover:opacity-100 p-2 text-gray-400 hover:text-white transition-all"><span class="material-icons-round text-base">add</span></button>
+                </div>
+                -->
+            </div>
         </div>
     </main>
-
-    <!-- Floating Mini Player -->
-    <div class="floating-player-container">
-        <!-- Progress Bar -->
-        <div class="mini-progress-bar">
-            <div class="progress-fill"></div>
+    <div class="fixed bottom-0 left-0 right-0 z-30 bg-[#0D0712]">
+        <div class="h-1 bg-surface-highlight w-full relative group cursor-pointer">
+            <div class="h-full bg-primary w-1/3 relative shadow-[0_0_15px_rgba(157,21,229,0.8)]">
+                <div
+                    class="absolute -right-1.5 -top-1 w-3 h-3 bg-white rounded-full shadow-lg scale-0 group-hover:scale-100 transition-transform duration-200">
+                </div>
+            </div>
         </div>
-
-        <div class="glass-mini-player">
-            <!-- Player Content -->
-            <div class="player-left">
-                <!-- Mini Video/Artwork -->
-                <div class="mini-video-wrapper">
-                    <img id="mini-player-img" src="assets/images/covers/cover_swing_dnb.png" alt="Cover"
-                        style="width: 100%; height: 100%; object-fit: cover;">
-                    <div style="display:none;"> <!-- Hidden iframe container -->
-                        <iframe id="main-player" src="" title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                        </iframe>
+        <nav class="bg-[#130b1b]/95 border-t border-white/5 px-6 pt-2 pb-8 backdrop-blur-md">
+            <div class="flex justify-between items-end">
+                <button onclick="window.location.href='index.html'"
+                    class="flex flex-col items-center gap-1.5 p-2 min-w-[64px] group opacity-60 hover:opacity-100 transition-all">
+                    <span
+                        class="material-icons-round text-2xl text-white group-hover:text-primary transition-colors">grid_view</span>
+                    <span
+                        class="text-[9px] font-semibold text-white uppercase tracking-wider group-hover:text-primary transition-colors">Hub</span>
+                </button>
+                <button onclick="window.location.href='about.html'"
+                    class="flex flex-col items-center gap-1.5 p-2 min-w-[64px] group opacity-60 hover:opacity-100 transition-all">
+                    <span
+                        class="material-icons-round text-2xl text-white group-hover:text-primary transition-colors">person</span>
+                    <span
+                        class="text-[9px] font-semibold text-white uppercase tracking-wider group-hover:text-primary transition-colors">Artist</span>
+                </button>
+                <button onclick="window.open('https://www.youtube.com/@fi4cre', '_blank')"
+                    class="flex flex-col items-center gap-1.5 p-2 min-w-[64px] group opacity-60 hover:opacity-100 transition-all">
+                    <span
+                        class="material-icons-round text-2xl text-white group-hover:text-primary transition-colors">smart_display</span>
+                    <span
+                        class="text-[9px] font-semibold text-white uppercase tracking-wider group-hover:text-primary transition-colors">Video</span>
+                </button>
+                <button class="flex flex-col items-center gap-1.5 p-2 min-w-[64px] group">
+                    <div class="relative">
+                        <span
+                            class="material-icons-round text-2xl text-primary drop-shadow-[0_0_8px_rgba(157,21,229,0.6)]">play_circle</span>
+                        <span class="absolute inset-0 bg-primary rounded-full blur-md opacity-20 animate-pulse"></span>
                     </div>
-                </div>
-            </div>
-
-            <div class="player-center">
-                <div class="now-playing-info">
-                    <h4 id="current-title" class="truncate">Select a track</h4>
-                    <p id="current-artist" class="truncate">fi4cr</p>
-                </div>
-            </div>
-
-            <div class="player-right">
-                <button id="mini-play-btn" class="control-btn">
-                    <span class="material-symbols-outlined">play_arrow</span>
-                </button>
-                <button id="next-btn" class="control-btn">
-                    <span class="material-symbols-outlined">skip_next</span>
+                    <span
+                        class="text-[9px] font-bold text-primary uppercase tracking-wider shadow-black drop-shadow-sm">Player</span>
                 </button>
             </div>
-        </div>
-
-        <!-- Bottom Nav for Player Page (Consistent with Hub) -->
-        <nav class="bottom-nav relative w-full" style="border-top: none;">
-            <a href="index.html" class="nav-item">
-                <div class="nav-icon-container">
-                    <span class="material-symbols-outlined">music_note</span>
-                </div>
-                <span>Hub</span>
-            </a>
-            <a href="about.html" class="nav-item">
-                <div class="nav-icon-container">
-                    <span class="material-symbols-outlined">person</span>
-                </div>
-                <span>Artist</span>
-            </a>
-            <a href="https://www.youtube.com/@fi4cre" target="_blank" class="nav-item">
-                <div class="nav-icon-container">
-                    <span class="material-symbols-outlined">smart_display</span>
-                </div>
-                <span>YouTube</span>
-            </a>
-            <a href="player.html" class="nav-item active">
-                <div class="nav-icon-container">
-                    <span class="material-symbols-outlined">play_circle</span>
-                </div>
-                <span>Player</span>
-            </a>
         </nav>
     </div>
-
-    <script type="module" src="assets/js/script.js?v=5"></script>
+    <!-- Script Inclusion -->
+    <script type="module" src="assets/js/script.js?v=7"></script>
 </body>
 
 </html>

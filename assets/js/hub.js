@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Shared Art Mapping
-    const CACHE_VERSION = '2';
+    const CACHE_VERSION = '3';
     const playlistArt = {
         "Swing D&B": "assets/images/covers/cover_swing_dnb.png",
         "Ragga D&B": "assets/images/covers/cover_ragga_dnb.png",
