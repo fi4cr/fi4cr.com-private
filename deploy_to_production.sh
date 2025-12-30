@@ -25,4 +25,24 @@ rsync -av --delete --exclude 'assets/data/playlists.json' "$SOURCE" "$DEST"
 echo "Filtering playlists..."
 python3 filter_playlists.py
 
+echo "Configuring git for production deployment..."
+cd "$DEST" || exit
+# Initialize git if not already initialized
+if [ ! -d ".git" ]; then
+    git init
+    git branch -M main
+fi
+
+# Configure remote (add or set-url to ensure it's correct)
+if git remote | grep -q "^origin$"; then
+    git remote set-url origin https://github.com/fi4cr/fi4cr.com
+else
+    git remote add origin https://github.com/fi4cr/fi4cr.com
+fi
+
+echo "Committing and pushing to production..."
+git add .
+git commit -m "Deploy production $(date)"
+git push -u origin main --force
+
 echo "Deployment complete."
