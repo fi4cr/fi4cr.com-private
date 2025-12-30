@@ -193,9 +193,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const featuredBg = document.getElementById('featured-img-bg');
 
     // Use a timestamp to prevent caching of the playlist data
-    fetch(`assets/data/playlists.json?v=${new Date().getTime()}`)
-        .then(response => response.json())
-        .then(data => {
+    Promise.all([
+        fetch(`assets/data/playlists.json?v=${new Date().getTime()}`).then(r => r.json()),
+        fetch(`assets/data/descriptions.json?v=${CACHE_VERSION}`).then(r => r.json())
+    ])
+        .then(([data, descriptions]) => {
+            // Assign loaded descriptions to the global/shared object or variable
+            // Since getArtForPlaylist and descriptions logic are coupled, let's redefine the lookup
+            // We can just use the 'descriptions' object directly in the logic below.
+
+            // Helper to get description from the loaded JSON
+            function getDescriptionForPlaylist(name, count) {
+                for (const [key, value] of Object.entries(descriptions)) {
+                    if (name.includes(key)) {
+                        return value.replace('{count}', count);
+                    }
+                }
+                return "";
+            }
+
             const now = new Date();
             let allPublishedVideos = [];
 
@@ -256,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const displayName = latestPly.playlist_name.replace('fi4cr - ', '');
 
                 if (featuredTitle) featuredTitle.textContent = displayName;
-                if (featuredTracks) featuredTracks.textContent = `Experience the future of jungle. A meticulously curated collection of ${latestPly.videos.length} tracks blending classic rhythms with neural synthesis.`;
+                if (featuredTracks) featuredTracks.textContent = getDescriptionForPlaylist(displayName, latestPly.videos.length);
                 const artSrc = getArtForPlaylist(displayName);
                 if (featuredBg) featuredBg.src = artSrc;
 
@@ -267,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderPlaylists(allPlaylists);
 
         })
-        .catch(error => console.error('Error loading playlists for hub:', error));
+        .catch(error => console.error('Error loading data for hub:', error));
 
     function renderPlaylists(playlists) {
         const coreCollectionsContainer = document.getElementById('core-collections');

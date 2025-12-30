@@ -42,6 +42,12 @@ This script:
 - **Glassmorphism UI**: Modern, translucent effects on headers and players.
 - **Mobile-First**: Fully responsive layout.
 
+## Maintenance
+
+When adding new playlists:
+1.  **Artwork**: Generate a new abstract cover image and save it to `assets/images/covers/`. Update the `playlistArt` object in `assets/js/hub.js`.
+2.  **Descriptions**: Add a new entry to `assets/data/descriptions.json` with a short, punchy description (use `{count}` placeholder). WITHOUT THIS, THE FEATURED TRACKS DESCRIPTION WILL BE BLANK.
+
 ## Tech Stack
 
 - **HTML5**: Semantic structure.
