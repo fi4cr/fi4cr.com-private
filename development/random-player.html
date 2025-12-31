@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AI Artist Player</title>
+    <!-- Auto-routing for Mobile -->
+    <script>
+        if (window.innerWidth < 768) {
+            const urlParams = new URLSearchParams(window.location.search);
+            window.location.href = 'mobile-random-player.html?' + urlParams.toString();
+        }
+    </script>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a413ec",
+                        "primary-hover": "#8f10ce",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#1c1022",
+                        "surface-dark": "#2b1933",
+                        "text-secondary": "#b792c9",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                    boxShadow: {
+                        "glow": "0 0 20px rgba(164, 19, 236, 0.3)",
+                        "glow-strong": "0 0 30px rgba(164, 19, 236, 0.5)",
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Custom scrollbar hiding for cleaner UI */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark min-h-screen w-full flex flex-col font-display text-slate-900 dark:text-white overflow-hidden selection:bg-primary selection:text-white">
+    <!-- Mobile Container (Simulating a phone screen centered on desktop if viewed there, full width on mobile) -->
+    <div
+        class="relative flex flex-col h-screen w-full max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-2xl overflow-hidden">
+        <!-- Top App Bar -->
+        <header
+            class="flex items-center justify-between px-6 pt-6 pb-2 z-10 bg-gradient-to-b from-background-light dark:from-background-dark to-transparent">
+            <!-- Left Icon -->
+            <div
+                class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-dark/50 text-white backdrop-blur-sm">
+                <span class="material-symbols-outlined text-primary" style="font-size: 24px;">graphic_eq</span>
+            </div>
+            <!-- Title -->
+            <div class="flex flex-col items-center text-center max-w-[240px]">
+                <h2 id="track-title"
+                    class="text-sm font-bold leading-tight text-slate-900 dark:text-white truncate w-full">Loading...
+                </h2>
+                <p id="track-artist" class="text-xs font-medium text-text-secondary truncate w-full">Please wait</p>
+            </div>
+            <!-- Right Icon (Settings) -->
+            <button
+                class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-slate-900 dark:text-white"
+                    style="font-size: 24px;">settings</span>
+            </button>
+        </header>
+        <!-- Main Content Area -->
+        <main
+            class="flex-1 overflow-y-auto px-6 pt-4 pb-24 no-scrollbar flex flex-col justify-start items-center gap-6">
+            <!-- Album Art Card / Video Player -->
+            <div class="w-full aspect-square relative group perspective-1000">
+                <div
+                    class="absolute inset-2 bg-primary rounded-2xl blur-xl opacity-20 dark:opacity-30 group-hover:opacity-40 transition-opacity duration-700">
+                </div>
+                <div id="youtube-player-container"
+                    class="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 bg-surface-dark transform transition-transform duration-500 hover:scale-[1.02] z-10">
+                    <div id="track-art"
+                        class="w-full h-full bg-cover bg-center absolute inset-0 transition-opacity duration-500"
+                        data-alt="Abstract vibrant purple and deep blue digital fluid art representing AI generated music"
+                        style="background-image: url('assets/images/covers/cover_default.png');">
+                    </div>
+                    <!-- Gradient Overlay for depth -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent opacity-60 pointer-events-none">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Randomize Button -->
+            <div class="w-full flex justify-center mt-4">
+                <button id="randomize-btn"
+                    class="relative flex items-center justify-center gap-3 pl-6 pr-8 py-4 bg-surface-dark border border-primary/40 hover:border-primary/80 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-glow transition-all group active:translate-y-0.5 w-full max-w-[240px]">
+                    <div
+                        class="bg-primary/20 p-2 rounded-full text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined group-hover:rotate-180 transition-transform duration-500"
+                            style="font-size: 24px;">casino</span>
+                    </div>
+                    <span class="text-sm font-bold tracking-widest uppercase text-white">Randomize</span>
+                </button>
+            </div>
+        </main>
+        <script src="assets/js/random-player.js"></script>
+</body>
+
+</html>
